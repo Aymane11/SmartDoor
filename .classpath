@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-controls:15.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-controls:win:15.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-graphics:15.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-fxml:11.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-fxml:win:11.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-swing:11.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-swing:win:11.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-graphics:win:11.0.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-base:11.0.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.openjfx:javafx-base:win:11.0.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv-platform:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas-platform:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp-platform:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:android-arm:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:android-arm64:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:android-x86:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:android-x86_64:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:ios-arm64:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:ios-x86_64:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:linux-armhf:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:linux-arm64:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:linux-ppc64le:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:linux-x86:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:linux-x86_64:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:macosx-x86_64:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:windows-x86:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:windows-x86_64:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:android-arm:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:android-arm64:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:android-x86:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:android-x86_64:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:ios-arm64:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:ios-x86_64:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:linux-x86:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:linux-x86_64:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:linux-armhf:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:linux-arm64:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:linux-ppc64le:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:macosx-x86_64:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:windows-x86:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:openblas:windows-x86_64:0.3.10-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:javacpp:1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:android-arm:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:android-arm64:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:android-x86:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:android-x86_64:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:ios-arm64:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:ios-x86_64:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:linux-x86:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:linux-x86_64:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:linux-armhf:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:linux-arm64:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:linux-ppc64le:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:macosx-x86_64:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:windows-x86:4.4.0-1.5.4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bytedeco:opencv:windows-x86_64:4.4.0-1.5.4"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

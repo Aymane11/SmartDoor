@@ -1,0 +1,41 @@
+.text-input
+{
+    /*-fx-background-radius : 20;
+    -fx-text-fill:  #FFF;
+    -fx-prompt-text-fill: #000;*/
+}
+
+.signin_button {
+    -fx-background-color : #6F4CBB;
+    -fx-text-fill:  #FFF;
+}
+.signin_button:hover
+{
+    -fx-text-fill:  #431FA0;
+}
+.signin_button:pressed
+{
+    -fx-text-fill: #371897;
+}
+
+.donthaveaccount {
+    -fx-background-color : #D5CBEB;
+    -fx-background-radius : 5;
+    -fx-text-fill:  #371897;
+    -fx-border-color:  #6F4CBB;
+    -fx-border-radius:  5;
+}
+.donthaveaccount:hover
+{
+    -fx-background-color : #E4EEFD;
+}
+.donthaveaccount:pressed
+{
+    -fx-background-color : #E4EEFD;
+    -fx-background-radius : 20;
+}
+
+
+.linear-grad {
+    -fx-background-color: linear-gradient(to bottom left, #6F4CBB, #431FA0);
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="box" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+    <stylesheets>
+        <URL value="@../css/home.css" />
+    </stylesheets>
+   <bottom>
+      <BorderPane prefHeight="150.0" prefWidth="600.0" styleClass="alert" BorderPane.alignment="CENTER">
+         <center>
+             <Label styleClass="alertMessage" text="Wear a Mask Buddy to Get In" BorderPane.alignment="CENTER" />
+         </center>
+         <top>
+         </top>
+      </BorderPane>
+   </bottom>
+   <center>
+      <ImageView fx:id="webCam" fitHeight="223.0" fitWidth="504.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER"></ImageView>
+   </center>
+</BorderPane>
