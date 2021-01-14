@@ -11,8 +11,8 @@
     <properties>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
-        <!--<exec.mainClass>MainWindow</exec.mainClass>-->
-        <exec.mainClass>opencv.MaskDetector</exec.mainClass>
+        <exec.mainClass>MainWindow</exec.mainClass>
+        <!-- <exec.mainClass>opencv.MaskDetector</exec.mainClass> -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
