@@ -86,9 +86,9 @@ public class HomeController implements Initializable {
                 this.capture.read(frame);
 
                 // if the frame is not empty, process it
-                if (!frame.empty()) {
+                /*if (!frame.empty()) {
                     Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
-                }
+                }*/
 
             } catch (Exception e) {
                 // log the error
