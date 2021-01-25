@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import opencv.FaceDetection;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
@@ -19,6 +22,15 @@ public class HomeController implements Initializable {
 
     @FXML
     private ImageView webCam;
+
+    @FXML
+    private GridPane bigContainer;
+
+    @FXML
+    private BorderPane webCamContainer;
+
+    private double widthRatio = 1;
+    private double heightRatio = 1;
 
     // a timer for acquiring the video stream
     private ScheduledExecutorService timer;
@@ -102,8 +114,7 @@ public class HomeController implements Initializable {
     /**
      * Stop the acquisition from the camera and release all the resources
      */
-    private void stopAcquisition()
-    {
+    private void stopAcquisition() {
         if (this.timer!=null && !this.timer.isShutdown()) {
             try {
                 // stop the timer
@@ -144,5 +155,16 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Programme started!");
         startCamera();
+        bigContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
+            webCam.setFitWidth(webCamContainer.getWidth()*0.8);
+            System.out.println("cam : Width = " + webCam.getFitWidth() + ", Height = " + webCam.getFitHeight());
+            System.out.println("big : Width = " + bigContainer.getWidth() + ", Height = " + bigContainer.getHeight());
+        });
+
+        bigContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
+            webCam.setFitHeight(webCamContainer.getHeight()*0.8);
+            System.out.println("cam : Width = " + webCam.getFitWidth() + ", Height = " + webCam.getFitHeight());
+            System.out.println("big : Width = " + bigContainer.getWidth() + ", Height = " + bigContainer.getHeight());
+        });
     }
 }
