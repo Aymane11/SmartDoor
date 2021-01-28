@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
-  `userame` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -69,7 +69,7 @@ CREATE TABLE `session` (
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `userame` (`userame`);
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `person`

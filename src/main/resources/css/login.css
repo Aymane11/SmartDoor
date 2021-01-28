@@ -1,0 +1,23 @@
+* {
+    -fx-gray-800: #1f2937;
+    -fx-cyan-400: #00a7e5;
+}
+
+.anchor {
+    -fx-text-fill: -fx-gray;
+    -fx-border-color: transparent;
+    -fx-padding: 4 0 4 0;
+    -fx-underline: false;
+}
+
+.anchor:hover {
+    -fx-text-fill: -fx-white;
+    -fx-underline: false;
+}
+
+.anchor:visited {
+    -fx-underline: false;
+    -fx-text-fill: -fx-gray;
+    -fx-border-color: transparent;
+    -fx-padding: 4 0 4 0;
+}

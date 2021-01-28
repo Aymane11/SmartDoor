@@ -34,6 +34,10 @@ final public class FileSystem {
         return Paths.get(getResourcesPath(), "icons").toString();
     }
 
+    public static String getEnvPath() {
+        return Paths.get(getResourcesPath(), "env").toString();
+    }
+
     public static String getOpenCVResourcesPath() {
         return Paths.get(getResourcesPath(), "opencv-resources").toString();
     }

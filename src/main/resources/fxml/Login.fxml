@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+	<stylesheets>
+		<URL value="@../css/login.css" />
+	</stylesheets>
+	<children>
+		<AnchorPane prefHeight="503.0" prefWidth="382.0" style="-fx-background-color: #0C39FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<children>
+				<Label alignment="CENTER" layoutX="104.0" layoutY="216.0" prefHeight="23.0" prefWidth="173.0" text="Smart Door" textFill="WHITE">
+					<font>
+						<Font size="32.0" />
+					</font>
+				</Label>
+				<Label alignment="CENTER" layoutX="88.0" layoutY="264.0" prefHeight="23.0" prefWidth="205.0" text="Create manage your wallets easily" textFill="WHITE" />
+				<Hyperlink fx:id="goBack" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="14.0" onMouseClicked="#handleButtonAction" prefHeight="29.0" prefWidth="78.0" styleClass="anchor" text="&lt; Go Back" textFill="#cbcbcb">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</Hyperlink>
+			</children>
+		</AnchorPane>
+		<Pane layoutX="452.0" layoutY="136.0" prefHeight="239.0" prefWidth="350.0" AnchorPane.bottomAnchor="128.0" AnchorPane.topAnchor="136.0">
+			<children>
+				<TextField fx:id="userField" layoutX="37.0" layoutY="33.0" prefHeight="34.0" prefWidth="275.0" promptText="Email" />
+				<PasswordField fx:id="passField" layoutX="37.0" layoutY="94.0" prefHeight="34.0" prefWidth="275.0" promptText="Password" />
+				<Label fx:id="labelErrors" alignment="CENTER" layoutX="36.0" layoutY="139.0" prefHeight="24.0" prefWidth="275.0" />
+				<Separator layoutX="37.0" layoutY="173.0" prefHeight="7.0" prefWidth="275.0" />
+				<Button fx:id="loginBtn" layoutX="38.0" layoutY="191.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="275.0" style="-fx-background-color: #0C39FF;" text="Sign in" textFill="WHITE" />
+			</children>
+		</Pane>
+	</children>
+</AnchorPane>

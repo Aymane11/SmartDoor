@@ -42,18 +42,15 @@ public class FaceDetection {
         // Equalize the frame histogram to improve the result (Normalization)
         Imgproc.equalizeHist(grayFrame, grayFrame);
 
-        // compute minimum face size (1% of the frame height, in our case)
-        int absoluteFaceSize = 0;
         int height = grayFrame.rows();
-        if (Math.round(height * 0.2f) > 0) {
-            absoluteFaceSize = Math.round(height * 0.01f);
-        }
 
         // Detect faces
-        double scaleFactor = 1.1;
+        double scaleFactor = 1.3;
         int minNeighbors = 2;
         int flags = 0 | Objdetect.CASCADE_SCALE_IMAGE;
-        Size minSize = new Size(absoluteFaceSize, absoluteFaceSize);
+        // minimum face size (120x120)
+        Size minSize = new Size(120, 120);
+        // maximum face size (frame height x frame height (square))
         Size maxSize = new Size(height, height);
         faceCascade.detectMultiScale(grayFrame, faces, scaleFactor, minNeighbors, flags, minSize, maxSize);
 

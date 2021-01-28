@@ -1,16 +1,25 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import opencv.FaceDetection;
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.VideoCapture;
+import javafx.stage.Stage;
+
 import support.OpenCV;
+import support.FileSystem;
+
+import opencv.FaceDetection;
+
+import org.opencv.core.Mat;
+import org.opencv.videoio.VideoCapture;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,7 +55,6 @@ public class HomeController implements Initializable {
 
     /**
      * The action triggered by pushing the button on the GUI
-     *
      */
     @FXML
     protected void startCamera() {
@@ -115,7 +123,7 @@ public class HomeController implements Initializable {
      * Stop the acquisition from the camera and release all the resources
      */
     private void stopAcquisition() {
-        if (this.timer!=null && !this.timer.isShutdown()) {
+        if (this.timer != null && !this.timer.isShutdown()) {
             try {
                 // stop the timer
                 this.timer.shutdown();
@@ -135,10 +143,8 @@ public class HomeController implements Initializable {
     /**
      * Update the {@link ImageView} in the JavaFX main thread
      *
-     * @param view
-     *            the {@link ImageView} to update
-     * @param image
-     *            the {@link Image} to show
+     * @param view  the {@link ImageView} to update
+     * @param image the {@link Image} to show
      */
     private void updateImageView(ImageView view, Image image) {
         OpenCV.onFXThread(view.imageProperty(), image);
@@ -156,15 +162,31 @@ public class HomeController implements Initializable {
         System.out.println("Programme started!");
         startCamera();
         bigContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
-            webCam.setFitWidth(webCamContainer.getWidth()*0.8);
-            System.out.println("cam : Width = " + webCam.getFitWidth() + ", Height = " + webCam.getFitHeight());
-            System.out.println("big : Width = " + bigContainer.getWidth() + ", Height = " + bigContainer.getHeight());
+            webCam.setFitWidth(webCamContainer.getWidth() * 0.8);
         });
 
         bigContainer.heightProperty().addListener((obs, oldVal, newVal) -> {
-            webCam.setFitHeight(webCamContainer.getHeight()*0.8);
-            System.out.println("cam : Width = " + webCam.getFitWidth() + ", Height = " + webCam.getFitHeight());
-            System.out.println("big : Width = " + bigContainer.getWidth() + ", Height = " + bigContainer.getHeight());
+            webCam.setFitHeight(webCamContainer.getHeight() * 0.8);
         });
+    }
+
+    @FXML
+    public void gotoLogin(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FileSystem.toURL(FileSystem.getFXML("Home")));
+            Parent root = loader.load();
+            HomeController home_controller = loader.getController();
+            home_controller.setClosed();
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            //stage.setMaximized(true);
+            stage.close();
+            Scene scene = new Scene(FXMLLoader.load(FileSystem.toURL(FileSystem.getFXML("Login"))));
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getMessage());
+        }
     }
 }

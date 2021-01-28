@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import java.net.URL?>
+<?import java.net.* ?>
+<?import javafx.scene.control.* ?>
+<?import javafx.scene.image.* ?>
+<?import javafx.scene.layout.* ?>
+<?import javafx.scene.text.* ?>
 
 <GridPane fx:id="bigContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="980.0" styleClass="box" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
-    <stylesheets>
-        <URL value="@../css/home.css" />
-    </stylesheets>
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints percentHeight="80.0" vgrow="SOMETIMES" />
-        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-    </rowConstraints>
-    <children>
-        <BorderPane fx:id="webCamContainer" GridPane.rowIndex="0" >
-            <center>
-                <ImageView fx:id="webCam" fitHeight="440.0" fitWidth="790.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
-            </center>
-        </BorderPane>
-        <BorderPane styleClass="alert" GridPane.rowIndex="1">
-            <center>
-                <Text fx:id="maskMessage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alertMessage" text="Wear a Mask Buddy to Get In" BorderPane.alignment="CENTER">
-                    <font>
-                        <Font size="36.0" />
-                    </font></Text>
-            </center>
-        </BorderPane>
-    </children>
+	<stylesheets>
+		<URL value="@../css/home.css" />
+	</stylesheets>
+	<columnConstraints>
+		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints percentHeight="80.0" vgrow="SOMETIMES" />
+		<RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+	</rowConstraints>
+	<children>
+		<BorderPane fx:id="webCamContainer" GridPane.rowIndex="0">
+			<center>
+				<ImageView fx:id="webCam" fitHeight="440.0" fitWidth="790.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+			</center>
+		</BorderPane>
+		<BorderPane styleClass="alert" GridPane.rowIndex="1">
+			<center>
+				<Text fx:id="maskMessage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alertMessage" text="Wear a Mask Buddy to Get In" BorderPane.alignment="CENTER">
+					<font>
+						<Font size="36.0" />
+					</font>
+				</Text>
+			</center>
+			<left>
+				<Button onMouseClicked="#gotoLogin" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+			</left>
+		</BorderPane>
+	</children>
 </GridPane>
