@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import opencv.FaceMaskDetection;
 import support.OpenCV;
 import support.FileSystem;
 
@@ -73,7 +74,8 @@ public class HomeController implements Initializable {
                     public void run() {
                         // effectively grab and process a single frame
                         Mat frame = grabFrame();
-                        frame = new FaceDetection(frame).detect().animateFrame().getFrame();
+                        frame = new FaceMaskDetection().detect(frame);
+                        //frame = new FaceDetection(frame).detect().animateFrame().getFrame();
 
                         // convert and show the frame
                         Image imageToShow = OpenCV.mat2Image(frame);
