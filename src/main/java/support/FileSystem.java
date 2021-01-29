@@ -45,13 +45,12 @@ final public class FileSystem {
     public static String getOpenCVResource(String path) {
         return Paths.get(getOpenCVResourcesPath(), path.split("/")).toString();
     }
-
-    public static String getTensorflowPath() {
-        return Paths.get(getResourcesPath(), "tensorflow").toString();
+    public static String getModelResourcePath() {
+        return Paths.get(getResourcesPath(), "model").toString();
     }
 
-    public static String getTensorflowResource(String path) {
-        return Paths.get(getTensorflowPath(), path.split("/")).toString();
+    public static String getModelResource(String path) {
+        return Paths.get(getModelResourcePath(), path.split("/")).toString();
     }
 
     public static String getFXML(String file) {
