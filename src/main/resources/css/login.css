@@ -3,21 +3,49 @@
     -fx-cyan-400: #00a7e5;
 }
 
+#AnchorPane {
+    -fx-background-color: #FFF;
+}
+
 .anchor {
-    -fx-text-fill: -fx-gray;
+    -fx-text-fill: #FFF;
     -fx-border-color: transparent;
     -fx-padding: 4 0 4 0;
     -fx-underline: false;
+    -fx-font-size: 10px;
 }
 
 .anchor:hover {
-    -fx-text-fill: -fx-white;
+    -fx-text-fill: #FFF;
     -fx-underline: false;
 }
 
 .anchor:visited {
     -fx-underline: false;
-    -fx-text-fill: -fx-gray;
+    -fx-text-fill: -fx-gray-800;
     -fx-border-color: transparent;
     -fx-padding: 4 0 4 0;
+}
+
+.left-sidebar-title {
+    -fx-font-size: 32px;
+    -fx-text-fill: #FFF;
+    -fx-text-alignment: left;
+
+}
+
+.left-sidebar-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #FFF;
+    -fx-text-alignment: left;
+}
+
+.signin-button {
+    -fx-background-color:  -fx-cyan-400;
+    -fx-font-size: 12px;
+    -fx-text-fill: #FFF;
+}
+
+.left-sidebar {
+    -fx-background-color:  -fx-cyan-400;
 }

@@ -26,3 +26,8 @@
     -fx-font-weight: 500;
     -fx-font-size: 24px;
 }
+
+.adminButton {
+    -fx-background-color:  rgba(0, 0, 0, 0.15);
+    -fx-cursor: hand;
+}

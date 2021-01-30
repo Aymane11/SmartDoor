@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.* ?>
 <?import javafx.scene.control.* ?>
 <?import javafx.scene.image.* ?>
 <?import javafx.scene.layout.* ?>
 <?import javafx.scene.text.* ?>
 
-<GridPane fx:id="bigContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="980.0" styleClass="box" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+<GridPane fx:id="bigContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="980.0" styleClass="box" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdoor.controllers.HomeController">
 	<stylesheets>
 		<URL value="@../css/home.css" />
 	</stylesheets>
@@ -24,16 +31,22 @@
 			</center>
 		</BorderPane>
 		<BorderPane styleClass="alert" GridPane.rowIndex="1">
-			<center>
-				<Text fx:id="maskMessage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alertMessage" text="Wear a Mask Buddy to Get In" BorderPane.alignment="CENTER">
-					<font>
-						<Font size="36.0" />
-					</font>
-				</Text>
-			</center>
-			<left>
-				<Button onMouseClicked="#gotoLogin" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-			</left>
+         <center>
+            <Label fx:id="maskMessage" styleClass="alertMessage" text="Wear a Mask Buddy to Get In" BorderPane.alignment="CENTER" />
+         </center>
+         <left>
+				<Button mnemonicParsing="false" onMouseClicked="#gotoLogin" styleClass="adminButton" BorderPane.alignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/user.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+         </left>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
 		</BorderPane>
 	</children>
 </GridPane>

@@ -1,4 +1,4 @@
-package opencv;
+package smartdoor.opencv;
 
 import org.datavec.image.loader.NativeImageLoader;
 import org.deeplearning4j.nn.graph.ComputationGraph;
@@ -7,7 +7,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
-import support.FileSystem;
+import smartdoor.support.FileSystem;
 
 public class FaceMaskDetection {
     public Mat detect(Mat frame) {
