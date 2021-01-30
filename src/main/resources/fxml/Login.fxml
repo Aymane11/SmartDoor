@@ -28,9 +28,9 @@
 		</AnchorPane>
 		<Pane layoutX="452.0" layoutY="136.0" prefHeight="239.0" prefWidth="350.0" AnchorPane.bottomAnchor="128.0" AnchorPane.topAnchor="136.0">
 			<children>
-				<TextField fx:id="userField" layoutX="37.0" layoutY="33.0" prefHeight="34.0" prefWidth="275.0" promptText="Email" />
+				<TextField fx:id="userField" layoutX="37.0" layoutY="33.0" prefHeight="34.0" prefWidth="275.0" promptText="Username" />
 				<PasswordField fx:id="passField" layoutX="37.0" layoutY="94.0" prefHeight="34.0" prefWidth="275.0" promptText="Password" />
-				<Label fx:id="labelErrors" alignment="CENTER" layoutX="36.0" layoutY="139.0" prefHeight="24.0" prefWidth="275.0" />
+				<Label fx:id="labelErrors" styleClass="label-error" alignment="CENTER" layoutX="36.0" layoutY="139.0" prefHeight="24.0" prefWidth="275.0" />
 				<Separator layoutX="37.0" layoutY="173.0" prefHeight="7.0" prefWidth="275.0" />
 				<Button fx:id="loginBtn" layoutX="38.0" layoutY="191.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="275.0" styleClass="signin-button" text="Sign in" textFill="WHITE" />
 			</children>

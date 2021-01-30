@@ -39,15 +39,16 @@ public class Admin extends Model {
         Admin result = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM admin where username IN (?)"
+                    "SELECT * FROM admin where username = ? LIMIT 1"
             );
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
+                result = new Admin();
                 result.setId(resultSet.getInt("id"));
                 result.setUsername(resultSet.getString("username"));
-                result.setPassword(resultSet.getString("password"));
+                result.password = resultSet.getString("password");
             }
 
         } catch (Exception e) {
@@ -111,5 +112,14 @@ public class Admin extends Model {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

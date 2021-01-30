@@ -83,34 +83,29 @@ public class LoginController implements Initializable {
         String password = passField.getText();
 
         if(username.isEmpty() || password.isEmpty()) {
-            setLblError(Color.TOMATO, "Username and password cannot be empty.");
+            setLblError("Username and password cannot be empty.");
             return false;
         } else {
             //Add user to database (beta)
             /*
-            Admin admin = new Admin();
-            admin.setUsername(username);
-            admin.setPassword(password);
-            admin.insert();
-
-            System.out.println(admin.getId());
-            System.out.println(admin.getUsername());
-            System.out.println(admin.getPassword());
+            Admin newAdmin = new Admin();
+            newAdmin.setUsername("othmane");
+            newAdmin.setPassword("password");
+            newAdmin.insert();
              */
 
             Admin admin = Admin.get(username);
+            System.out.println(admin);
             if ( admin == null || ! BCrypt.checkpw(password, admin.getPassword())) {
-                setLblError(Color.TOMATO, "Wrong email or password.");
+                setLblError("Wrong email or password.");
                 return false;
             } else {
-                setLblError(Color.GREEN, "You have been logged in successfully. Redirecting...");
                 return true;
             }
         }
     }
 
-    private void setLblError(Color color, String text) {
-        labelErrors.setTextFill(color);
+    private void setLblError(String text) {
         labelErrors.setText(text);
     }
 

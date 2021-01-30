@@ -49,3 +49,9 @@
 .left-sidebar {
     -fx-background-color:  -fx-cyan-400;
 }
+
+.label-error {
+    -fx-text-fill: #f44336;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
