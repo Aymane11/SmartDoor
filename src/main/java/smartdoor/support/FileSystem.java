@@ -31,7 +31,7 @@ final public class FileSystem {
     }
 
     public static String getIconsPath() {
-        return Paths.get(getResourcesPath(), "icons").toString();
+        return Paths.get(getResourcesPath(), "images/icons").toString();
     }
 
     public static String getEnvPath() {
@@ -61,6 +61,10 @@ final public class FileSystem {
         }
 
         return Paths.get(getFXMLPath(), file).toString();
+    }
+
+    public static String getImageResource(String path) {
+        return Paths.get(getImagesPath(), path.split("/")).toString();
     }
 
     public static Path toPath(String path) {

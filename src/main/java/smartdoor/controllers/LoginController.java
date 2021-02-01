@@ -7,19 +7,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import smartdoor.models.Admin;
-import smartdoor.support.ConnectionDB;
 import smartdoor.support.FileSystem;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import java.sql.*;
 
 public class LoginController implements Initializable {
     @FXML
@@ -36,14 +32,6 @@ public class LoginController implements Initializable {
 
     @FXML
     private Hyperlink goBack;
-
-    Connection con;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
-
-    public LoginController() {
-        con = ConnectionDB.getConnection();
-    }
 
     public void changeView(MouseEvent event, String FXMLFile, boolean maximized){
         try {
@@ -67,7 +55,7 @@ public class LoginController implements Initializable {
     public void handleButtonAction(MouseEvent event) {
         if (event.getSource() == loginBtn) {
             // Check if the credentiels are correct!
-            if (loginAction() == true) {
+            if (loginAction()) {
                 changeView(event,"Dashboard",false);
             }
         }

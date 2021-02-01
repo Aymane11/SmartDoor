@@ -30,7 +30,7 @@
 				<ImageView fx:id="webCam" fitHeight="440.0" fitWidth="790.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
 			</center>
 		</BorderPane>
-		<BorderPane styleClass="alert" GridPane.rowIndex="1">
+		<BorderPane fx:id="alertBackground" styleClass="alert" GridPane.rowIndex="1">
          <center>
             <Label fx:id="maskMessage" styleClass="alertMessage" text="Wear a Mask Buddy to Get In" BorderPane.alignment="CENTER" />
          </center>
@@ -39,7 +39,7 @@
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/user.png" />
+                        <Image url="@../images/icons/user.png" />
                      </image>
                   </ImageView>
                </graphic></Button>

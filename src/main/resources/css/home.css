@@ -1,8 +1,11 @@
 @import "Roboto.css";
 
 * {
+    -fx-gray-400: rgba(156,163,175, 1);
     -fx-gray-800: #1f2937;
     -fx-cyan-400: #00a7e5;
+    -fx-green-500: rgba(16,185,129, 1);
+    -fx-red-500: rgba(239,68,68,1);
 }
 
 .root {
@@ -19,6 +22,15 @@
 .alert {
     -fx-background-color: -fx-cyan-400;
     -fx-padding: 40px 40px 40px 40px;
+}
+.alert.denied {
+    -fx-background-color: -fx-red-500;
+}
+.alert.success {
+    -fx-background-color: -fx-green-500;
+}
+.alert.verifying {
+    -fx-background-color: -fx-gray-400;
 }
 
 .alertMessage {
