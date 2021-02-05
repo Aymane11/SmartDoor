@@ -14,24 +14,21 @@ import org.opencv.dnn.Dnn;
 import org.opencv.dnn.Net;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-import smartdoor.support.FileSystem;
+import smartdoor.utils.FileSystem;
+import smartdoor.utils.INDArrayHelper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FaceMaskDetection {
-    private static ComputationGraph model = null;
-
     private FaceDetection faceDetection;
 
-    public static ComputationGraph getModelInstance() throws InvalidKerasConfigurationException, IOException, UnsupportedKerasConfigurationException {
-        if (model == null) {
-            model = KerasModelImport.importKerasModelAndWeights(
-                FileSystem.getModelResource("mask_detector.model")
-            );
-        }
+    private static final double THRESHOLD = 0.5f;
+    private static ComputationGraph model = null;
+    private static Net faceNet = null;
 
-        return model;
-    }
     /**
      * Detect if the frame contains a face wearing a mask
      *
@@ -43,11 +40,10 @@ public class FaceMaskDetection {
      * @param frame The image as a Mat
      * @return int
      * */
-    public int detect(Mat frame) {
+    public int detectUsingHaarcascadesOpencv(Mat frame) {
         try {
-
             // load the model
-            model = FaceMaskDetection.getModelInstance();
+            ComputationGraph model = FaceMaskDetection.getModelInstance();
 
             // Detect faces
             faceDetection = new FaceDetection(frame).detect();
@@ -61,7 +57,7 @@ public class FaceMaskDetection {
 
             int counter = 0;
             for (Rect face : faces) {
-                Imgproc.rectangle(frame, face.tl(), face.br(), new Scalar(0, 167, 229), 1);
+                Imgproc.rectangle(frame, face.tl(), face.br(), new Scalar(229, 167, 0), 1);
 
                 Mat subFace = frame.submat(face);
 
@@ -86,8 +82,8 @@ public class FaceMaskDetection {
                     label = "Mask";
                 }
 
-                Imgproc.putText(frame, label, new Point(face.x, face.y - 10), Imgproc.FONT_HERSHEY_SIMPLEX, 0.45, color, 2);
                 Imgproc.rectangle(frame, face.tl(), face.br(), color, 2);
+                Imgproc.putText(frame, label, new Point(face.x, face.y - 10), Imgproc.FONT_HERSHEY_SIMPLEX, 0.45, color, 2);
                  */
 
                 System.out.println("WithMask = " + mask + " | withoutMask = " + withoutMask);
@@ -105,72 +101,116 @@ public class FaceMaskDetection {
 
         return 0;
     }
-    
-    public Mat detect2(Mat frame) {
+
+    /**
+     * Detect if the frame contains a face wearing a mask
+     *
+     * It returns :
+     * -1 if no faces detected
+     * 0 if at least one of the faces is not wearing a mask
+     * 1 if all the faces are wearing a mask
+     *
+     * @param frame The image as a Mat
+     * @return int
+     * */
+    public int detect(Mat frame) {
         try {
-            // load our serialized face detector model from disk
-            System.out.println("[INFO] loading face detector model...");
-            System.out.println(FileSystem.getModelResource("face_detector/deploy.prototxt"));
-            Net net = Dnn.readNet(
-                    FileSystem.getModelResource("face_detector/deploy.prototxt"),
-                    FileSystem.getModelResource("face_detector/res10_300x300_ssd_iter_140000.caffemodel")
-            );
-            // load the face mask detector model from disk
-            System.out.println("[INFO] loading face mask detector model...");
+            Net faceNet = getFaceNetInstance();
 
             // load the model
-            ComputationGraph model = KerasModelImport.importKerasModelAndWeights(
-                    FileSystem.getModelResource("mask_detector.model")
-            );
+            ComputationGraph model = FaceMaskDetection.getModelInstance();
 
-            // load the input image from disk, clone it, and grab the image spatial
-            // dimensions
-            Mat image = Imgcodecs.imread(FileSystem.getOpenCVResource("images/girl-with-mask.png"));
-            int w = image.cols(), h = image.rows();
+            Mat resizedFrame = new Mat();
+            Imgproc.resize(frame, resizedFrame, new Size(400, 400));
 
-            // Construct a blob from the image
-            Mat blob = Dnn.blobFromImage(
-                    image,
+            Mat blob = Dnn.blobFromImage(resizedFrame,
                     1.0,
                     new Size(300, 300),
                     new Scalar(104.0, 177.0, 123.0)
             );
 
-            // pass the blob through the network and obtain the face detections
-            System.out.println("[INFO] computing face detections...");
-            net.setInput(blob);
-            Mat detections = net.forward();
-            System.out.println(detections.size().width);
-            System.out.println(detections.get(0, 0));
-            for (int i = 0; i < detections.size().width; i++) {
-                // extract the confidence (i.e., probability) associated with
-                // the detection
-                //float confidence = (float) detections.get(0, 0, new int[] {i, 2});
-                // filter out weak detections by ensuring the confidence is
-                // greater than the minimum confidence
+            faceNet.setInput(blob);
+            Mat detections = faceNet.forward();
+            detections = detections.reshape(1, (int)detections.total() / 7);
 
-                //if (confidence > 0.5f) {
-                    // compute the (x, y)-coordinates of the bounding box for
-                    // the box
-                    Mat box = new Mat();
-                    System.out.println(detections.submat(0, 0, i, 3));
+            int cols = frame.cols();
+            int rows = frame.rows();
 
-                    //detections.submat(0, 0, i, );
-                    //box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
-                    //(startX, startY, endX, endY) = box.astype("int")
-                //}
+            // Initialize our list of faces
+            List<INDArray> faces = new ArrayList<INDArray>();
 
-             }
+            for (int i = 0, j = 0; i < detections.rows(); ++i) {
+                double confidence = detections.get(i, 2)[0];
+
+                if (confidence > THRESHOLD) {
+                    // Detected face coordinates
+                    int startX   = Math.max((int)(detections.get(i, 3)[0] * cols), 0);
+                    int startY    = Math.max((int)(detections.get(i, 4)[0] * rows), 0);
+                    int endX  = Math.min((int)(detections.get(i, 5)[0] * cols), cols - 1);
+                    int endY = Math.min((int)(detections.get(i, 6)[0] * rows), rows - 1);
+
+                    // The detected face
+                    Mat face = frame.submat(new Range(startY, endY), new Range(startX, endX));
+
+                    // Convert face to RGB
+                    Mat RGBFace = new Mat();
+                    Imgproc.cvtColor(face, RGBFace, Imgproc.COLOR_BGR2RGB);
+
+                    Mat resizedFace = new Mat();
+                    Imgproc.resize(RGBFace, resizedFace, new Size(224, 224));
+
+                    INDArray faceINDArray = new NativeImageLoader().asMatrix(resizedFace);
+                    new ImagePreProcessingScaler().	preProcess(faceINDArray);
+
+                    faces.add(faceINDArray.reshape(1, 224, 224, 3));
+
+                    // Add rectangle to the frame
+                    Imgproc.rectangle(frame, new Point(startX, startY), new Point(endX, endY), new Scalar(255, 0, 0), 2);
+                }
+            }
+
+            int facesSize = faces.size();
+            if (facesSize == 0) {
+                return -1;
+            }
+
+            INDArray[] predictions = model.output(INDArrayHelper.listToArray(faces));
+
+            for (INDArray prediction: predictions) {
+                double mask = prediction.getDouble(0);
+                double withoutMask = prediction.getDouble(1);
+
+                if (mask < 0.9 || withoutMask > mask){
+                    return 0;
+                }
+            }
+
+            return 1;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return frame;
+
+        return -1;
     }
 
-    public static void main(String[] args) {
-        Loader.load(opencv_java.class);
+    public static ComputationGraph getModelInstance() throws InvalidKerasConfigurationException, IOException, UnsupportedKerasConfigurationException {
+        if (model == null) {
+            model = KerasModelImport.importKerasModelAndWeights(
+                FileSystem.getModelResource("mask_detector.model")
+            );
+        }
 
-        new FaceMaskDetection().detect2(new Mat());
+        return model;
+    }
 
+    public static Net getFaceNetInstance() {
+        if (faceNet == null) {
+            String prototxtPath = FileSystem.getModelResource("face_detector/deploy.prototxt");
+            String weightsPath = FileSystem.getModelResource("face_detector/res10_300x300_ssd_iter_140000.caffemodel");
+            faceNet = Dnn.readNet(prototxtPath, weightsPath);
+        }
+
+        return  faceNet;
     }
 }

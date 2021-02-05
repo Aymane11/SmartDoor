@@ -11,8 +11,10 @@ import javafx.stage.Stage;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import smartdoor.dao.AdminDao;
+import smartdoor.dao.impl.AdminDaoImpl;
 import smartdoor.models.Admin;
-import smartdoor.support.FileSystem;
+import smartdoor.utils.FileSystem;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -79,11 +81,14 @@ public class LoginController implements Initializable {
             Admin newAdmin = new Admin();
             newAdmin.setUsername("othmane");
             newAdmin.setPassword("password");
-            newAdmin.insert();
+            AdminDao adminDao = new AdminDaoImpl();
+            adminDao.insert(newAdmin);
              */
 
-            Admin admin = Admin.get(username);
+            AdminDao adminDao = new AdminDaoImpl();
+            Admin admin = adminDao.get(username);
             System.out.println(admin);
+
             if ( admin == null || ! BCrypt.checkpw(password, admin.getPassword())) {
                 setLblError("Wrong email or password.");
                 return false;

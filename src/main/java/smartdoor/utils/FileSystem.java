@@ -1,4 +1,4 @@
-package smartdoor.support;
+package smartdoor.utils;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -49,6 +49,10 @@ final public class FileSystem {
         return Paths.get(getResourcesPath(), "model").toString();
     }
 
+    public static String getDataResourcePath() {
+        return Paths.get(getResourcesPath(), "data").toString();
+    }
+
     public static String getModelResource(String path) {
         return Paths.get(getModelResourcePath(), path.split("/")).toString();
     }
@@ -91,5 +95,9 @@ final public class FileSystem {
             return ""; // empty extension
         }
         return name.substring(lastIndexOf);
+    }
+
+    public static String getDataResource(String path) {
+        return Paths.get(getDataResourcePath(), path.split("/")).toString();
     }
 }

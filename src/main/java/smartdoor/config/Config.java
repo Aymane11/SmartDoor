@@ -1,7 +1,7 @@
 package smartdoor.config;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import smartdoor.support.FileSystem;
+import smartdoor.utils.FileSystem;
 
 abstract class Config {
     final protected static Dotenv dotenv = Dotenv.configure()

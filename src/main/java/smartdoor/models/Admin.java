@@ -2,11 +2,7 @@ package smartdoor.models;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
-public class Admin extends Model {
+public class Admin {
     private int id;
     private String username;
     private String password;
@@ -15,7 +11,7 @@ public class Admin extends Model {
         return id;
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -35,83 +31,8 @@ public class Admin extends Model {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public static Admin get(String username) {
-        Admin result = null;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM admin where username = ? LIMIT 1"
-            );
-            preparedStatement.setString(1, username);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                result = new Admin();
-                result.setId(resultSet.getInt("id"));
-                result.setUsername(resultSet.getString("username"));
-                result.password = resultSet.getString("password");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public Admin insert() {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO `admin` (`username`, `password`) VALUES (?, ?)",
-                    Statement.RETURN_GENERATED_KEYS
-            );
-            //preparedStatement.setInt(1, id);
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            preparedStatement.executeUpdate();
-
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                setId(resultSet.getInt(1));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return this;
-    }
-
-    public Admin update() {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE admin SET " +
-                            "username = ?, " +
-                            "password = ? " +
-                            "WHERE id = ? " +
-                            "LIMIT 1"
-            );
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            preparedStatement.setInt(3, id);
-            preparedStatement.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return this;
-    }
-
-    public void delete() {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM admin WHERE id = ? LIMIT 1"
-            );
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setHashedPassword(String password) {
+        this.password = password;
     }
 
     @Override

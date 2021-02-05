@@ -1,4 +1,4 @@
-package smartdoor.support;
+package smartdoor.utils;
 
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;

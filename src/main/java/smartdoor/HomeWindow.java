@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.bytedeco.javacpp.Loader;
 import org.bytedeco.opencv.opencv_java;
-import smartdoor.support.FileSystem;
+import smartdoor.utils.FileSystem;
 
 public class HomeWindow extends Application {
     protected Stage window;
@@ -43,8 +43,8 @@ public class HomeWindow extends Application {
         if (loader.getController() instanceof HomeController) {
             ((HomeController) loader.getController()).setClosed();
         }
+
         window.close();
-        Platform.exit();
         System.exit(0);
     }
 

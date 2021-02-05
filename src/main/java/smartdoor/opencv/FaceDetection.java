@@ -1,6 +1,6 @@
 package smartdoor.opencv;
 
-import smartdoor.support.OpenCV;
+import smartdoor.utils.OpenCV;
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
