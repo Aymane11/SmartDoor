@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import org.opencv.imgcodecs.Imgcodecs;
 import smartdoor.opencv.FaceMaskDetection;
 import smartdoor.support.OpenCV;
 import smartdoor.support.FileSystem;
@@ -54,8 +55,6 @@ public class HomeController implements Initializable {
     // the id of the camera to be used
     private static final int cameraId = 0;
 
-    private int counter = 0;
-
     /**
      * The action triggered by pushing the button on the GUI
      */
@@ -68,23 +67,23 @@ public class HomeController implements Initializable {
         if (this.capture.isOpened()) {
             // grab a frame every 33 ms (30 frames/sec)
             Runnable frameGrabber = () -> {
-                    // effectively grab and process a single frame
-                    Mat frame = grabFrame();
+                // effectively grab and process a single frame
+                Mat frame = grabFrame();
+                //frame = new FaceMaskDetection().detect(frame);
 
-                    try {
-                        this.counter += 33;
-                        if (this.counter == 33*100) {
-                            this.counter = 0;
+                // Check if the mask detected or not
+                int maskDetectedValue = new FaceMaskDetection().detect(frame);
 
-                            this.updateAlertMsg(new FaceMaskDetection().detect(frame));
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                // Update the info bar
+                this.updateAlertMsg(maskDetectedValue);
 
-                    // convert and show the frame
-                    Image imageToShow = OpenCV.mat2Image(frame);
-                    this.updateImageView(webCam, imageToShow);
+                if (maskDetectedValue == 1) {
+                    frame = OpenCV.image2Mat(FileSystem.getImageResource("open-door.jpg"));
+                }
+
+                // convert and show the frame
+                Image imageToShow = OpenCV.mat2Image(frame);
+                this.updateImageView(webCam, imageToShow);
             };
 
             this.timer = Executors.newSingleThreadScheduledExecutor();
@@ -185,23 +184,28 @@ public class HomeController implements Initializable {
         }
     }
 
-    public void updateAlertMsg(boolean success) {
-        if (success) {
+    public synchronized void updateAlertMsg(int maskDetectedValue) {
+        ObservableList<String> styleClass = alertBackground.getStyleClass();
+
+        if (maskDetectedValue == 1) {
             this.setClosed();
-            this.updateImageView(webCam, new Image(String.valueOf(FileSystem.toURL(FileSystem.getImageResource("open-door.jpg")))));
 
-            ObservableList<String> styleClass = alertBackground.getStyleClass();
+            styleClass.removeAll("denied", "waiting");
             styleClass.add("success");
-            styleClass.remove("denied");
-
             this.maskMessage.setText("Access granted");
-        } else {
-            ObservableList<String> styleClass = alertBackground.getStyleClass();
-            styleClass.remove("success");
-            styleClass.add("denied");
-            this.counter = 0;
 
+        } else if (maskDetectedValue == 0){
+
+            styleClass.removeAll("waiting", "success");
+            styleClass.add("denied");
+            maskMessage.setText("Access denied! Wear a mask.");
+
+        } else if (maskDetectedValue == -1){
+
+            styleClass.removeAll("denied", "success");
+            styleClass.add("waiting");
             this.maskMessage.setText("Access denied! Wear a mask.");
+
         }
     }
 }

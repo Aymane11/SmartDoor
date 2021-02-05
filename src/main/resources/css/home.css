@@ -29,7 +29,7 @@
 .alert.success {
     -fx-background-color: -fx-green-500;
 }
-.alert.verifying {
+.alert.waiting {
     -fx-background-color: -fx-gray-400;
 }
 

@@ -12,7 +12,7 @@ public class FaceDetection {
 
     private Mat grayFrame = new Mat();
 
-    private CascadeClassifier faceCascade = new CascadeClassifier();
+    private static CascadeClassifier faceCascadeClassifier;
 
     private MatOfRect faces = new MatOfRect();
 
@@ -22,19 +22,22 @@ public class FaceDetection {
         this(OpenCV.image2Mat(input));
     }
 
-    public FaceDetection(Mat frame) {
-        this.frame = frame;
-
-        loadCascadeClassifier();
-
-        generateGrayScale();
+    public FaceDetection(Mat image) {
+        frame = image;
+        faceCascadeClassifier = getCascadeClassifierInstance();
+        generateGrayScale(grayFrame);
     }
 
-    private void loadCascadeClassifier() {
-        faceCascade.load(OpenCV.faceDetectionCascadePath());
+    public CascadeClassifier getCascadeClassifierInstance() {
+        if (faceCascadeClassifier == null) {
+            faceCascadeClassifier = new CascadeClassifier();
+            faceCascadeClassifier.load(OpenCV.faceDetectionCascadePath());
+        }
+
+        return faceCascadeClassifier;
     }
 
-    private void generateGrayScale() {
+    private void generateGrayScale(Mat grayFrame) {
         Imgproc.cvtColor(frame, grayFrame, Imgproc.COLOR_BGR2GRAY);
     }
 
@@ -52,7 +55,7 @@ public class FaceDetection {
         Size minSize = new Size(120, 120);
         // maximum face size (frame height x frame height (square))
         Size maxSize = new Size(height, height);
-        faceCascade.detectMultiScale(grayFrame, faces, scaleFactor, minNeighbors, flags, minSize, maxSize);
+        faceCascadeClassifier.detectMultiScale(grayFrame, faces, scaleFactor, minNeighbors, flags, minSize, maxSize);
 
         facesArray = faces.toArray();
 
