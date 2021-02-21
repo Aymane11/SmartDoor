@@ -14,7 +14,7 @@ public class SessionDaoImpl implements SessionDao {
 
     @Override
     public List<Session> getAll() {
-        List<Session> sessions = new ArrayList<Session>();
+        List<Session> sessions = new ArrayList<>();
         ConnectionDB conn = null;
         try {
             conn = new ConnectionDB();
@@ -27,7 +27,7 @@ public class SessionDaoImpl implements SessionDao {
             while (resultSet.next()) {
                 Session session = new Session();
                 session.setId(resultSet.getInt("id"));
-                session.setDate_in(resultSet.getString("date_in"));
+                session.setDate_in(resultSet.getTimestamp("date_in"));
                 session.setFilename(resultSet.getString("file"));
                 sessions.add(session);
             }
@@ -37,8 +37,9 @@ public class SessionDaoImpl implements SessionDao {
         } finally {
             if (conn != null)
                 conn.close();
-            return sessions;
         }
+
+        return sessions;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class SessionDaoImpl implements SessionDao {
                     Statement.RETURN_GENERATED_KEYS
             );
 
-            preparedStatement.setString(1, session.getDate_in());
+            preparedStatement.setTimestamp(1, session.getDate_inTimestamp());
             preparedStatement.setString(2, session.getFilename());
             preparedStatement.executeUpdate();
 
