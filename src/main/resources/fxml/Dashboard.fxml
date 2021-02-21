@@ -18,9 +18,9 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="ap" stylesheets="@../css/dashboard.css">
                             <children>
-                                <Button layoutX="238.0" layoutY="127.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="124.0" styleClass="btn" text="Add Admin" />
-                                <Button layoutX="238.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" styleClass="btn" text="Logout" />
-                                <Button layoutX="238.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" styleClass="btn" text="Update Account" />
+                                <Button fx:id="logoutBtn" onMouseClicked="#addAdmin" layoutX="238.0" layoutY="248.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="124.0" styleClass="btn" text="Add Admin" />
+                                <Button fx:id="editBtn" onMouseClicked="#editDetails" layoutX="238.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" styleClass="btn" text="Edit Credentials" />
+                                <Button fx:id="addAdminBtn" onMouseClicked="#logout" layoutX="238.0" layoutY="127.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" styleClass="btn" text="Logout" />
                             </children>
                         </AnchorPane>
                     </content>

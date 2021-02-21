@@ -1,8 +1,6 @@
 package smartdoor.dao.impl;
 
-import smartdoor.dao.AdminDao;
-import smartdoor.dao.SessionDAO;
-import smartdoor.models.Admin;
+import smartdoor.dao.SessionDao;
 import smartdoor.models.Session;
 import smartdoor.utils.ConnectionDB;
 
@@ -12,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SessionDAOImpl implements SessionDAO {
+public class SessionDaoImpl implements SessionDao {
 
     @Override
     public List<Session> getAll() {

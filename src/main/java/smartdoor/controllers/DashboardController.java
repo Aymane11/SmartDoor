@@ -7,58 +7,97 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import smartdoor.actions.SessionAction;
-import smartdoor.dao.impl.SessionDAOImpl;
+import smartdoor.dao.impl.SessionDaoImpl;
 import smartdoor.models.Session;
-import smartdoor.opencv.FaceMaskDetection;
-import smartdoor.utils.OpenCV;
 import smartdoor.utils.FileSystem;
 
-import org.opencv.core.Mat;
-import org.opencv.videoio.VideoCapture;
-
-import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class DashboardController implements Initializable {
     @FXML
     private TableView<Session> sessionsTable = new TableView<>();
+
+    @FXML
+    private Button logoutBtn;
+
+    @FXML
+    private Button addAdminBtn;
+
+    @FXML
+    private Button editBtn;
+
     private ObservableList<Session> data ;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        data=        FXCollections.observableArrayList(new SessionDAOImpl().getAll());
+        data = FXCollections.observableArrayList(new SessionDaoImpl().getAll());
         TableColumn idCol = new TableColumn("ID");
         idCol.setMinWidth(100);
-        idCol.setCellValueFactory(
-                new PropertyValueFactory<>("id"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn dateInCol = new TableColumn("Date In");
         dateInCol.setMinWidth(100);
-        dateInCol.setCellValueFactory(
-                new PropertyValueFactory<>("date_in"));
+        dateInCol.setCellValueFactory(new PropertyValueFactory<>("date_in"));
 
         TableColumn fileNameCol = new TableColumn("File name");
         fileNameCol.setMinWidth(200);
-        fileNameCol.setCellValueFactory(
-                new PropertyValueFactory<>("filename"));
+        fileNameCol.setCellValueFactory(new PropertyValueFactory<>("filename"));
 
         sessionsTable.setItems(data);
         sessionsTable.getColumns().addAll(idCol, dateInCol, fileNameCol);
     }
+
+    public void logout(MouseEvent event) {
+        try {
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+
+            Scene scene = new Scene(FXMLLoader.load(FileSystem.toURL(FileSystem.getFXML("Home"))));
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addAdmin(MouseEvent event) throws IOException {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(stage);
+        dialog.setTitle("Add admin");
+
+        Scene scene = new Scene(FXMLLoader.load(FileSystem.toURL(FileSystem.getFXML("AddAdmin"))));
+
+        dialog.setScene(scene);
+        dialog.show();
+    }
+
+    public void editDetails(MouseEvent event) throws IOException {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(stage);
+        dialog.setTitle("Edit Details");
+
+        Scene scene = new Scene(FXMLLoader.load(FileSystem.toURL(FileSystem.getFXML("Edit"))));
+
+        dialog.setScene(scene);
+        dialog.show();
+    }
+
 }

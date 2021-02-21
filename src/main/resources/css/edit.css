@@ -1,0 +1,5 @@
+.labelErrors {
+    -fx-text-fill: #f44336;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}

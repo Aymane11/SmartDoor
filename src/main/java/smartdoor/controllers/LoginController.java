@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+    static Admin currentAdmin = null;
+
     @FXML
     private Label labelErrors;
 
@@ -56,12 +58,13 @@ public class LoginController implements Initializable {
     @FXML
     public void handleButtonAction(MouseEvent event) {
         if (event.getSource() == loginBtn) {
-            // Check if the credentiels are correct!
+            // Check if the credentials are correct
             if (loginAction()) {
                 changeView(event,"Dashboard",false);
             }
         }
 
+        // Go back to user view
         if (event.getSource() == goBack){
             changeView(event,"Home",false);
         }
@@ -76,23 +79,14 @@ public class LoginController implements Initializable {
             setLblError("Username and password cannot be empty.");
             return false;
         } else {
-            //Add user to database (beta)
-            /*
-            Admin newAdmin = new Admin();
-            newAdmin.setUsername("othmane");
-            newAdmin.setPassword("password");
-            AdminDao adminDao = new AdminDaoImpl();
-            adminDao.insert(newAdmin);
-             */
-
             AdminDao adminDao = new AdminDaoImpl();
             Admin admin = adminDao.get(username);
-            System.out.println(admin);
 
             if ( admin == null || ! BCrypt.checkpw(password, admin.getPassword())) {
                 setLblError("Wrong email or password.");
                 return false;
             } else {
+                currentAdmin = admin;
                 return true;
             }
         }
