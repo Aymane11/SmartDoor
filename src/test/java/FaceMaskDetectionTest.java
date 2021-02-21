@@ -43,5 +43,6 @@ public class FaceMaskDetectionTest extends TestCase {
 		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("people-with-mask (1).jpg"))));
 		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("people-with-mask (2).jpg"))));
 		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("people-with-mask (3).jpg"))));
+//
 	}
 }
