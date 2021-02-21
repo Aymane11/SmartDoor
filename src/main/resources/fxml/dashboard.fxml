@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdoor.controllers.DashboardController">
+    <stylesheets>
+        <URL value="@../css/dashboard.css" />
+    </stylesheets>
+    <children>
+        <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="tab_pane" stylesheets="@../css/dashboard.css" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab styleClass="t" text="Dashboard">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="ap" stylesheets="@../css/dashboard.css">
+                            <children>
+                                <Button layoutX="238.0" layoutY="127.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="124.0" styleClass="btn" text="Add Admin" />
+                                <Button layoutX="238.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" styleClass="btn" text="Logout" />
+                                <Button layoutX="238.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" styleClass="btn" text="Update Account" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab styleClass="t" text="Sessions">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="ap">
+                            <children>
+                                <TableView fx:id="sessionsTable" layoutY="2.0" prefHeight="368.0" prefWidth="600.0" styleClass="table" stylesheets="@../css/dashboard.css" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

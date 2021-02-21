@@ -20,7 +20,7 @@
 }
 
 .alert {
-    -fx-background-color: -fx-cyan-400;
+    -fx-background-color: #48D1CC;
     -fx-padding: 40px 40px 40px 40px;
 }
 .alert.denied {
@@ -29,7 +29,7 @@
 .alert.success {
     -fx-background-color: -fx-green-500;
 }
-.alert.waiting {
+.alert.verifying {
     -fx-background-color: -fx-gray-400;
 }
 

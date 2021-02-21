@@ -1,6 +1,6 @@
 * {
     -fx-gray-800: #1f2937;
-    -fx-cyan-400: #00a7e5;
+
 }
 
 #AnchorPane {
@@ -41,17 +41,11 @@
 }
 
 .signin-button {
-    -fx-background-color:  -fx-cyan-400;
+    -fx-background-color:  #48D1CC;
     -fx-font-size: 12px;
     -fx-text-fill: #FFF;
 }
 
 .left-sidebar {
-    -fx-background-color:  -fx-cyan-400;
-}
-
-.label-error {
-    -fx-text-fill: #f44336;
-    -fx-font-size: 10px;
-    -fx-font-weight: bold;
+    -fx-background-color:  #48D1CC;
 }
