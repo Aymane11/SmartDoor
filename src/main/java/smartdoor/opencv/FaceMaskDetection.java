@@ -29,6 +29,7 @@ public class FaceMaskDetection {
     private static ComputationGraph model = null;
     private static Net faceNet = null;
 
+
     /**
      * Detect if the frame contains a face wearing a mask
      *
@@ -174,13 +175,13 @@ public class FaceMaskDetection {
                 return -1;
             }
 
-            INDArray[] predictions = model.output(INDArrayHelper.listToArray(faces));
+            for (INDArray face: faces) {
+                INDArray[] predictions = model.output(face);
 
-            for (INDArray prediction: predictions) {
-                double mask = prediction.getDouble(0);
-                double withoutMask = prediction.getDouble(1);
+                double mask = predictions[0].getDouble(0);
+                double withoutMask = predictions[0].getDouble(1);
 
-                if (mask < 0.9 || withoutMask > mask){
+                if (mask < withoutMask){
                     return 0;
                 }
             }

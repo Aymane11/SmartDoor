@@ -16,33 +16,33 @@ public class FaceMaskDetectionTest extends TestCase {
 
 	@Test
 	public void test_it_detects_person_with_a_mask() {
-		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("mask (2).jpg"))));
-		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("mask (3).jpg"))));
-		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("mask (4).jpg"))));
+		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("mask2.jpg"))));
+		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("mask3.jpg"))));
+		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("mask4.jpg"))));
 	}
 
 	@Test
 	public void test_it_detects_the_person_with_no_mask() {
-		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("no-mask (1).jpg"))));
-		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("no-mask (2).jpg"))));
-		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("no-mask (3).jpg"))));
-		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("no-mask (4).jpg"))));
-		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("no-mask (5).jpg"))));
+		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("nomask1.jpg"))));
+		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("nomask2.jpg"))));
+		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("nomask3.jpg"))));
+		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("nomask4.jpg"))));
+		assertEquals(0, faceMaskDetection.detect(OpenCV.image2Mat(getResource("nomask5.jpg"))));
 	}
 
 	@Test
 	public void test_it_can_detect_if_there_is_no_face() {
-		assertEquals(-1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("no-face (1).jpg"))));
-		assertEquals(-1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("no-face (2).jpg"))));
-		assertEquals(-1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("no-face (3).jpg"))));
-		assertEquals(-1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("no-face (4).jpg"))));
+		assertEquals(-1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("noface1.jpg"))));
+		assertEquals(-1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("noface2.jpg"))));
+		assertEquals(-1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("noface3.jpg"))));
+		assertEquals(-1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("noface4.jpg"))));
 	}
 
 	@Test
 	public void test_it_detects_people_with_maks() {
-		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("people-with-mask (1).jpg"))));
-		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("people-with-mask (2).jpg"))));
-		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("people-with-mask (3).jpg"))));
+		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("pplmask1.jpg"))));
+		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("pplmask2.jpg"))));
+		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("pplmask3.jpg"))));
 //
 	}
 }

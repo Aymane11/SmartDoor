@@ -73,15 +73,12 @@ public class EditController implements Initializable {
         }
 
         // Create new admin and remove the old one
-        Admin newAdmin = new Admin();
-        newAdmin.setUsername(username);
-        newAdmin.setPassword(password);
-        AdminDao newAdminDao = new AdminDaoImpl();
-        newAdminDao.insert(newAdmin);
-        newAdminDao.delete(currentAdmin);
+        currentAdmin.setUsername(username);
+        currentAdmin.setPassword(password);
+        AdminDao AdminDao = new AdminDaoImpl();
+        AdminDao.update(currentAdmin);
 
-        // Get new admin from db (test)
-        System.out.println(new AdminDaoImpl().get(username));
+        LoginController.currentAdmin = null;
 
         // Go back to home view
 

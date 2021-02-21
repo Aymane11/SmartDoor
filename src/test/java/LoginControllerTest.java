@@ -28,25 +28,25 @@ public class LoginControllerTest {
 
     @Test
     public void test_it_fails_if_one_the_fields_is_empty() {
-        assertFalse(LoginController.login("", "password"));
-        assertFalse(LoginController.login("username", ""));
+        assertNull(LoginController.login("", "password"));
+        assertNull(LoginController.login("username", ""));
     }
 
     @Test
     public void test_it_fails_if_the_username_is_incorrect() {
 
-        assertFalse(LoginController.login("incorrect", "password"));
+        assertNull(LoginController.login("incorrect", "password"));
     }
 
     @Test
     public void test_it_fails_if_the_password_is_incorrect() {
 
-        assertFalse(LoginController.login(admin.getUsername(), "incorrect"));
+        assertNull(LoginController.login(admin.getUsername(), "incorrect"));
     }
 
     @Test
     public void test_it_works_if_the_credentials_are_correct() {
 
-        assertTrue(LoginController.login(admin.getUsername(), "password"));
+        assertTrue(LoginController.login(admin.getUsername(), "password") instanceof Admin);
     }
 }

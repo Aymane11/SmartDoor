@@ -7,7 +7,7 @@
     -fx-text-fill: #FFF;
 }
 
-.tab_pane *.tab-header-background {
+.tab_pane .tab-header-background {
     -fx-background-color: -fx-outer-background, -fx-inner-border, derive(-fx-color, -100%);
 }
 .t{

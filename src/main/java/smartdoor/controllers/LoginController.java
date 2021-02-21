@@ -79,10 +79,8 @@ public class LoginController implements Initializable {
             setLblError("Username and password cannot be empty.");
             return false;
         } else {
-            AdminDao adminDao = new AdminDaoImpl();
-            Admin admin = adminDao.get(username);
-
-            if ( admin == null || ! BCrypt.checkpw(password, admin.getPassword())) {
+            Admin admin = login(username, password);
+            if ( admin == null ) {
                 setLblError("Wrong email or password.");
                 return false;
             } else {
@@ -90,6 +88,19 @@ public class LoginController implements Initializable {
                 return true;
             }
         }
+    }
+
+    public static Admin login(String username, String password) {
+        if (username.isEmpty() || password.isEmpty())
+            return null;
+
+        AdminDao adminDao = new AdminDaoImpl();
+        Admin admin = adminDao.get(username);
+
+        if (admin == null || ! BCrypt.checkpw(password, admin.getPassword()))
+            return null;
+
+        return admin;
     }
 
     private void setLblError(String text) {

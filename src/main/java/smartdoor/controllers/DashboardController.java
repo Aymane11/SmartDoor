@@ -58,6 +58,8 @@ public class DashboardController implements Initializable {
 
     public void logout(MouseEvent event) {
         try {
+            LoginController.currentAdmin = null;
+
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
             stage.close();
