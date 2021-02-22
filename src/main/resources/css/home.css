@@ -43,3 +43,10 @@
     -fx-background-color:  rgba(0, 0, 0, 0.15);
     -fx-cursor: hand;
 }
+
+.progressBar {
+    -fx-accent: #00a7e5;
+    -fx-background-color: #00FF00;
+    -fx-progress-color: #0000FF;
+    -fx-border-radius: 0;
+}

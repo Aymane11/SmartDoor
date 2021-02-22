@@ -16,7 +16,7 @@ public class AdminDaoTest {
 
         new AdminDaoImpl().insert(admin);
 
-        assertTrue(new AdminDaoImpl().get("hello") instanceof Admin);
+        assertTrue(new AdminDaoImpl().get("hello") != null);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class AdminDaoTest {
 
         new AdminDaoImpl().update(admin);
 
-        assertTrue(new AdminDaoImpl().get("hello2") instanceof Admin);
+        assertTrue(new AdminDaoImpl().get("hello2") != null);
     }
 
     @Test

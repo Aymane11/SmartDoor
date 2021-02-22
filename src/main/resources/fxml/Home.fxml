@@ -31,22 +31,22 @@
 			</center>
 		</BorderPane>
 		<BorderPane fx:id="alertBackground" styleClass="alert" GridPane.rowIndex="1">
-         <center>
-            <Label fx:id="maskMessage" styleClass="alertMessage" text="Wear a Mask Buddy to Get In" BorderPane.alignment="CENTER" />
-         </center>
-         <left>
+			<center>
+				<Label fx:id="maskMessage" styleClass="alertMessage" text="Wear a Mask Buddy to Get In" BorderPane.alignment="CENTER" />
+			</center>
+			<left>
 				<Button mnemonicParsing="false" onMouseClicked="#gotoLogin" styleClass="adminButton" BorderPane.alignment="CENTER">
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/user.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-         </left>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
+					<graphic>
+						<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../images/icons/user.png" />
+							</image>
+						</ImageView>
+					</graphic></Button>
+			</left>
+			<cursor>
+				<Cursor fx:constant="HAND" />
+			</cursor>
 		</BorderPane>
 	</children>
 </GridPane>
