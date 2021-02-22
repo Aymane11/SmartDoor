@@ -235,6 +235,7 @@ public class HomeController implements Initializable {
                 styleClass.add("verifying");
 
                 this.maskMessage.setText("Processing hold on " + (int) tries*100/MAX_TRIES + "%");
+
             } else if (maskDetectedValue == 3) {
                 styleClass.removeAll("denied", "verifying", "success");
                 // styleClass.add("success");
