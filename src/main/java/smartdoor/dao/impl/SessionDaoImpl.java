@@ -43,6 +43,58 @@ public class SessionDaoImpl implements SessionDao {
     }
 
     @Override
+    public Session get(String filename) {
+        Session session = null;
+        ConnectionDB conn = new ConnectionDB();
+        try {
+            String query = "SELECT * FROM session WHERE file = ?";
+            PreparedStatement preparedStatement = conn.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, filename);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                session = new Session();
+                session.setId(resultSet.getInt("id"));
+                session.setDate_in(resultSet.getTimestamp("date_in"));
+                session.setFilename(resultSet.getString("file"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+
+        return session;
+    }
+
+    @Override
+    public Session get(int id) {
+        Session session = null;
+        ConnectionDB conn = new ConnectionDB();
+        try {
+            String query = "SELECT * FROM session WHERE id = ?";
+            PreparedStatement preparedStatement = conn.getConnection().prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                session = new Session();
+                session.setId(resultSet.getInt("id"));
+                session.setDate_in(resultSet.getTimestamp("date_in"));
+                session.setFilename(resultSet.getString("file"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.close();
+        }
+
+        return session;
+    }
+
+    @Override
     public void create(Session session) {
         ConnectionDB conn = null;
         try {
@@ -62,26 +114,6 @@ public class SessionDaoImpl implements SessionDao {
             if (resultSet.next()) {
                 session.setId(resultSet.getInt(1));
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (conn != null)
-                conn.close();
-        }
-    }
-
-    @Override
-    public void delete(Session session) {
-        ConnectionDB conn = null;
-        try {
-            conn = new ConnectionDB();
-
-            String query = "DELETE FROM session WHERE id = ? LIMIT 1";
-
-            PreparedStatement preparedStatement = conn.getConnection().prepareStatement(query);
-            preparedStatement.setInt(1, session.getId());
-            preparedStatement.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -49,7 +49,7 @@ public class HomeController implements Initializable {
 
     private int tries = 0;
 
-    private final int MAX_TRIES = 50;
+    private final int MAX_TRIES = 12;
 
     /**
      * The action triggered by pushing the button on the GUI
@@ -234,7 +234,7 @@ public class HomeController implements Initializable {
                 styleClass.removeAll("denied", "success");
                 styleClass.add("verifying");
 
-                this.maskMessage.setText("Processing hold on");
+                this.maskMessage.setText("Processing hold on " + (int) tries*100/MAX_TRIES + "%");
             } else if (maskDetectedValue == 3) {
                 styleClass.removeAll("denied", "verifying", "success");
                 // styleClass.add("success");
