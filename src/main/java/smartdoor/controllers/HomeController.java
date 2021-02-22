@@ -1,5 +1,6 @@
 package smartdoor.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,53 +8,48 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import smartdoor.actions.SessionAction;
-import smartdoor.opencv.FaceMaskDetection;
-import smartdoor.utils.OpenCV;
-import smartdoor.utils.FileSystem;
-
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
+import smartdoor.actions.SessionAction;
+import smartdoor.opencv.FaceMaskDetection;
+import smartdoor.utils.FileSystem;
+import smartdoor.utils.OpenCV;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class HomeController implements Initializable {
+    // the id of the camera to be used
+    private static final int cameraId = 0;
+    // the OpenCV object that realizes the video capture
+    private final VideoCapture capture = new VideoCapture();
     @FXML
     private BorderPane alertBackground;
-
     @FXML
     private Label maskMessage;
-
     @FXML
     private ImageView webCam;
-
     @FXML
     private GridPane bigContainer;
-
     @FXML
     private BorderPane webCamContainer;
 
     // a timer for acquiring the video stream
     private ScheduledExecutorService timer;
 
-    // the OpenCV object that realizes the video capture
-    private final VideoCapture capture = new VideoCapture();
+    private int tries = 0;
 
-    // the id of the camera to be used
-    private static final int cameraId = 0;
+    private final int MAX_TRIES = 50;
 
     /**
      * The action triggered by pushing the button on the GUI
@@ -74,14 +70,24 @@ public class HomeController implements Initializable {
                 // Check if the mask detected or not
                 int maskDetectedValue = new FaceMaskDetection().detect(frame);
 
+                // The user is wearing a mask
                 if (maskDetectedValue == 1) {
-                    // Save the session, because the user wears a mask
-                    SessionAction sessionAction = new SessionAction(frame);
-                    sessionAction.save();
+                    maskDetectedValue = 2;
+                    tries++;
+                    // First let's check more than one time if the user is wearing a mask
+                    if (tries >= MAX_TRIES) {
+                        // Save the session, because the user wears a mask
+                        SessionAction sessionAction = new SessionAction(frame);
+                        sessionAction.save();
 
-                    frame = OpenCV.image2Mat(FileSystem.getImageResource("open-door.jpg"));
+                        tries = 0;
+                        // Block the camera for a while. Then re-open it
+                        frame = OpenCV.image2Mat(FileSystem.getImageResource("blackbg.jpg"));
+                        maskDetectedValue = 1;
+                    }
 
-                    // TODO: Play the camera again :)
+                } else {
+                    tries = 0;
                 }
 
                 // Update the info bar
@@ -90,6 +96,15 @@ public class HomeController implements Initializable {
                 // convert and show the frame
                 Image imageToShow = OpenCV.mat2Image(frame);
                 this.updateImageView(webCam, imageToShow);
+                if(maskDetectedValue==1){
+                    try {
+                        Thread.sleep(1000);
+                        this.updateAlertMsg(3);
+                        Thread.sleep(2000);
+                        startCamera();
+                    } catch (Exception e) {
+                    }
+                }
             };
 
             this.timer = Executors.newSingleThreadScheduledExecutor();
@@ -99,6 +114,7 @@ public class HomeController implements Initializable {
             System.err.println("Impossible to open the camera connection...");
         }
     }
+
 
     /**
      * Get a frame from the opened video stream (if any)
@@ -190,28 +206,41 @@ public class HomeController implements Initializable {
         }
     }
 
-    public synchronized void updateAlertMsg(int maskDetectedValue) {
-        ObservableList<String> styleClass = alertBackground.getStyleClass();
+    public void updateAlertMsg(int maskDetectedValue) {
+        Platform.runLater( () -> {
+            ObservableList<String> styleClass = alertBackground.getStyleClass();
 
-        if (maskDetectedValue == 1) {
-            this.setClosed();
+            if (maskDetectedValue == 1) {
+                this.setClosed();
 
-            styleClass.removeAll("denied", "waiting");
-            styleClass.add("success");
-            this.maskMessage.setText("Access granted");
+                styleClass.removeAll("denied", "verifying");
+                styleClass.add("success");
+                this.maskMessage.setText("Access granted");
 
-        } else if (maskDetectedValue == 0){
+            } else if (maskDetectedValue == 0) {
 
-            styleClass.removeAll("waiting", "success");
-            styleClass.add("denied");
-            maskMessage.setText("Access denied! Wear a mask.");
+                styleClass.removeAll("verifying", "success");
+                styleClass.add("denied");
+                maskMessage.setText("Access denied! Wear a mask.");
 
-        } else if (maskDetectedValue == -1){
+            } else if (maskDetectedValue == -1) {
 
-            styleClass.removeAll("denied", "success");
-            styleClass.add("waiting");
-            this.maskMessage.setText("Access denied! Wear a mask.");
+                styleClass.removeAll("denied", "success");
+                styleClass.add("verifying");
+                this.maskMessage.setText("Waiting for people.");
 
-        }
+            } else if (maskDetectedValue == 2) {
+
+                styleClass.removeAll("denied", "success");
+                styleClass.add("verifying");
+
+                this.maskMessage.setText("Processing hold on");
+            } else if (maskDetectedValue == 3) {
+                styleClass.removeAll("denied", "verifying", "success");
+                // styleClass.add("success");
+
+                this.maskMessage.setText("The door is open.");
+            }
+        });
     }
 }

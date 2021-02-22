@@ -1,6 +1,8 @@
 package smartdoor.actions;
 
 import org.opencv.core.Mat;
+import smartdoor.dao.impl.SessionDaoImpl;
+import smartdoor.models.Session;
 import smartdoor.utils.FileSystem;
 import smartdoor.utils.OpenCV;
 
@@ -18,9 +20,11 @@ public class SessionAction {
         String filename = generateFilename();
         OpenCV.mat2File(frame, FileSystem.getDataResource(filename));
 
-        // SessionDAO
-        // new Session()
-        // setDate ....
+        Session  session = new Session();
+        session.setDate_in();
+        session.setFilename(filename);
+
+        new SessionDaoImpl().create(session);
     }
 
     public String generateFilename() {
