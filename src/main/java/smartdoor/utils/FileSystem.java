@@ -18,9 +18,7 @@ final public class FileSystem {
         return Paths.get(getResourcesPath(), "fxml").toString();
     }
 
-    public static String getCSSPath() {
-        return Paths.get(getResourcesPath(), "css").toString();
-    }
+    public static String getCSSPath() { return Paths.get(getResourcesPath(), "css").toString(); }
 
     public static String getFontsPath() {
         return Paths.get(getResourcesPath(), "fonts").toString();
@@ -38,13 +36,6 @@ final public class FileSystem {
         return Paths.get(getResourcesPath(), ".env").toString();
     }
 
-    public static String getOpenCVResourcesPath() {
-        return Paths.get(getResourcesPath(), "opencv-resources").toString();
-    }
-
-    public static String getOpenCVResource(String path) {
-        return Paths.get(getOpenCVResourcesPath(), path.split("/")).toString();
-    }
     public static String getModelResourcePath() {
         return Paths.get(getResourcesPath(), "model").toString();
     }
@@ -53,23 +44,19 @@ final public class FileSystem {
         return Paths.get(getResourcesPath(), "data").toString();
     }
 
-    public static String getModelResource(String path) {
-        return Paths.get(getModelResourcePath(), path.split("/")).toString();
-    }
+    public static String getModelResource(String path) { return Paths.get(getModelResourcePath(), path.split("/")).toString(); }
 
     public static String getFXML(String file) {
         String extension = ".fxml";
 
-        if ( ! file.endsWith(extension) ) {
+        if (!file.endsWith(extension)) {
             file += extension;
         }
 
         return Paths.get(getFXMLPath(), file).toString();
     }
 
-    public static String getImageResource(String path) {
-        return Paths.get(getImagesPath(), path.split("/")).toString();
-    }
+    public static String getImageResource(String path) { return Paths.get(getImagesPath(), path.split("/")).toString(); }
 
     public static Path toPath(String path) {
         return Paths.get(path);
@@ -97,7 +84,5 @@ final public class FileSystem {
         return name.substring(lastIndexOf);
     }
 
-    public static String getDataResource(String path) {
-        return Paths.get(getDataResourcePath(), path.split("/")).toString();
-    }
+    public static String getDataResource(String path) { return Paths.get(getDataResourcePath(), path.split("/")).toString(); }
 }

@@ -1,10 +1,10 @@
 package smartdoor.utils;
 
-import smartdoor.config.DatabaseConfig;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import smartdoor.config.DatabaseConfig;
 
 public class ConnectionDB {
     private Connection conn;

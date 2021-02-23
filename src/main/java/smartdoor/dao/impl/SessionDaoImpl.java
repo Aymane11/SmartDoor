@@ -19,7 +19,7 @@ public class SessionDaoImpl implements SessionDao {
         try {
             conn = new ConnectionDB();
 
-            String query = "SELECT * FROM session";
+            String query = "SELECT * FROM session ORDER BY id DESC";
 
             PreparedStatement preparedStatement = conn.getConnection().prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import org.bytedeco.javacpp.Loader;
@@ -11,6 +12,8 @@ import org.bytedeco.opencv.opencv_java;
 
 import smartdoor.utils.FileSystem;
 import smartdoor.controllers.HomeController;
+
+import java.io.FileInputStream;
 
 public class HomeWindow extends Application {
     protected Stage primaryStage;
@@ -28,6 +31,7 @@ public class HomeWindow extends Application {
 
         primaryStage.setTitle("SmartDoor");
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image(new FileInputStream(FileSystem.getImageResource("icons/icon.png"))));
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> closeWindow());
     }

@@ -24,10 +24,6 @@ final public class OpenCV {
 
     public static void mat2File(Mat frame, String output) {
         try {
-            /*
-            File outputFile = new File(output);
-            ImageIO.write(matToBufferedImage(frame), FileSystem.getFileExtension(output), outputFile);
-             */
             Imgcodecs.imwrite(output, frame);
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,9 +84,5 @@ final public class OpenCV {
         System.arraycopy(sourcePixels, 0, targetPixels, 0, sourcePixels.length);
 
         return image;
-    }
-
-    public static String faceDetectionCascadePath() {
-        return FileSystem.getOpenCVResource("haarcascades/haarcascade_frontalface_alt.xml");
     }
 }

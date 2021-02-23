@@ -14,8 +14,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
+
 import smartdoor.actions.SessionAction;
 import smartdoor.opencv.FaceMaskDetection;
 import smartdoor.utils.FileSystem;
@@ -98,7 +100,7 @@ public class HomeController implements Initializable {
 
                         tries = 0;
                         // Block the camera for a while. Then re-open it
-                        frame = OpenCV.image2Mat(FileSystem.getImageResource("blackbg.jpg"));
+                        frame = OpenCV.image2Mat(FileSystem.getImageResource("open-door.jpg"));
 
                         maskDetectedValue = 1;
                     }
