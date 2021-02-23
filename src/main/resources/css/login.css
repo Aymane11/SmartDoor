@@ -1,10 +1,11 @@
-* {
-    -fx-gray-800: #1f2937;
+@import "style.css";
 
+.container {
+    -fx-background-color: #FFF;
 }
 
-#AnchorPane {
-    -fx-background-color: #FFF;
+.left-sidebar {
+    -fx-background-color: -fx-main-color;
 }
 
 .anchor {
@@ -12,7 +13,9 @@
     -fx-border-color: transparent;
     -fx-padding: 4 0 4 0;
     -fx-underline: false;
-    -fx-font-size: 10px;
+    -fx-font-size: 12px;
+    -fx-alignment: center;
+    -fx-content-display: center;
 }
 
 .anchor:hover {
@@ -21,8 +24,8 @@
 }
 
 .anchor:visited {
+    -fx-text-fill: #FFF;
     -fx-underline: false;
-    -fx-text-fill: -fx-gray-800;
     -fx-border-color: transparent;
     -fx-padding: 4 0 4 0;
 }
@@ -30,22 +33,6 @@
 .left-sidebar-title {
     -fx-font-size: 32px;
     -fx-text-fill: #FFF;
-    -fx-text-alignment: left;
-
-}
-
-.left-sidebar-subtitle {
-    -fx-font-size: 12px;
-    -fx-text-fill: #FFF;
-    -fx-text-alignment: left;
-}
-
-.signin-button {
-    -fx-background-color:  #48D1CC;
-    -fx-font-size: 12px;
-    -fx-text-fill: #FFF;
-}
-
-.left-sidebar {
-    -fx-background-color:  #48D1CC;
+    -fx-alignment: center;
+    -fx-content-display: center;
 }

@@ -2,7 +2,9 @@ package smartdoor.utils;
 
 import smartdoor.config.DatabaseConfig;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConnectionDB {
     private Connection conn;
@@ -19,27 +21,27 @@ public class ConnectionDB {
             );
 
         } catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
+            e.printStackTrace();
+        }
     }
 
     public Connection getConn() {
         return conn;
     }
 
-    public  Connection getConnection() {
+    public Connection getConnection() {
         return getConn();
     }
 
     public void close() {
-		if (conn != null) {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private String getDatabaseUrl() {
         return String.valueOf(

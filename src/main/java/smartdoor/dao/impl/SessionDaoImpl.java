@@ -44,9 +44,10 @@ public class SessionDaoImpl implements SessionDao {
 
     @Override
     public Session get(String filename) {
+        ConnectionDB conn = null;
         Session session = null;
-        ConnectionDB conn = new ConnectionDB();
         try {
+            conn = new ConnectionDB();
             String query = "SELECT * FROM session WHERE file = ?";
             PreparedStatement preparedStatement = conn.getConnection().prepareStatement(query);
             preparedStatement.setString(1, filename);
@@ -62,7 +63,9 @@ public class SessionDaoImpl implements SessionDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            if (conn != null) {
+                conn.close();
+            }
         }
 
         return session;
@@ -70,9 +73,10 @@ public class SessionDaoImpl implements SessionDao {
 
     @Override
     public Session get(int id) {
+        ConnectionDB conn = null;
         Session session = null;
-        ConnectionDB conn = new ConnectionDB();
         try {
+            conn = new ConnectionDB();
             String query = "SELECT * FROM session WHERE id = ?";
             PreparedStatement preparedStatement = conn.getConnection().prepareStatement(query);
             preparedStatement.setInt(1, id);
@@ -88,7 +92,9 @@ public class SessionDaoImpl implements SessionDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.close();
+            if (conn != null) {
+                conn.close();
+            }
         }
 
         return session;

@@ -1,7 +1,5 @@
 package smartdoor.opencv;
 
-import org.bytedeco.javacpp.Loader;
-import org.bytedeco.opencv.opencv_java;
 import org.datavec.image.loader.NativeImageLoader;
 import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.deeplearning4j.nn.modelimport.keras.KerasModelImport;
@@ -12,27 +10,42 @@ import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
 import org.opencv.core.*;
 import org.opencv.dnn.Dnn;
 import org.opencv.dnn.Net;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import smartdoor.utils.FileSystem;
-import smartdoor.utils.INDArrayHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FaceMaskDetection {
-    private FaceDetection faceDetection;
-
     private static final double THRESHOLD = 0.5f;
     private static ComputationGraph model = null;
     private static Net faceNet = null;
+    private FaceDetection faceDetection;
 
+    public static ComputationGraph getModelInstance() throws InvalidKerasConfigurationException, IOException, UnsupportedKerasConfigurationException {
+        if (model == null) {
+            model = KerasModelImport.importKerasModelAndWeights(
+                    FileSystem.getModelResource("mask_detector.model")
+            );
+        }
+
+        return model;
+    }
+
+    public static Net getFaceNetInstance() {
+        if (faceNet == null) {
+            String prototxtPath = FileSystem.getModelResource("face_detector/deploy.prototxt");
+            String weightsPath = FileSystem.getModelResource("face_detector/res10_300x300_ssd_iter_140000.caffemodel");
+            faceNet = Dnn.readNet(prototxtPath, weightsPath);
+        }
+
+        return faceNet;
+    }
 
     /**
      * Detect if the frame contains a face wearing a mask
-     *
+     * <p>
      * It returns :
      * -1 if no faces detected
      * 0 if at least one of the faces is not wearing a mask
@@ -40,7 +53,7 @@ public class FaceMaskDetection {
      *
      * @param frame The image as a Mat
      * @return int
-     * */
+     */
     public int detectUsingHaarcascadesOpencv(Mat frame) {
         try {
             // load the model
@@ -66,7 +79,7 @@ public class FaceMaskDetection {
                 Imgproc.resize(subFace, subFaceResized, new Size(224, 224));
 
                 INDArray faceINDArray = new NativeImageLoader().asMatrix(subFaceResized);
-                new ImagePreProcessingScaler().	preProcess(faceINDArray);
+                new ImagePreProcessingScaler().preProcess(faceINDArray);
 
                 INDArray[] result = model.output(faceINDArray.reshape(1, 224, 224, 3));
                 double mask = result[0].getDouble(0);
@@ -105,7 +118,7 @@ public class FaceMaskDetection {
 
     /**
      * Detect if the frame contains a face wearing a mask
-     *
+     * <p>
      * It returns :
      * -1 if no faces detected
      * 0 if at least one of the faces is not wearing a mask
@@ -113,7 +126,7 @@ public class FaceMaskDetection {
      *
      * @param frame The image as a Mat
      * @return int
-     * */
+     */
     public int detect(Mat frame) {
         try {
             Net faceNet = getFaceNetInstance();
@@ -132,7 +145,7 @@ public class FaceMaskDetection {
 
             faceNet.setInput(blob);
             Mat detections = faceNet.forward();
-            detections = detections.reshape(1, (int)detections.total() / 7);
+            detections = detections.reshape(1, (int) detections.total() / 7);
 
             int cols = frame.cols();
             int rows = frame.rows();
@@ -140,15 +153,15 @@ public class FaceMaskDetection {
             // Initialize our list of faces
             List<INDArray> faces = new ArrayList<INDArray>();
 
-            for (int i = 0, j = 0; i < detections.rows(); ++i) {
+            for (int i = 0; i < detections.rows(); ++i) {
                 double confidence = detections.get(i, 2)[0];
 
                 if (confidence > THRESHOLD) {
                     // Detected face coordinates
-                    int startX   = Math.max((int)(detections.get(i, 3)[0] * cols), 0);
-                    int startY    = Math.max((int)(detections.get(i, 4)[0] * rows), 0);
-                    int endX  = Math.min((int)(detections.get(i, 5)[0] * cols), cols - 1);
-                    int endY = Math.min((int)(detections.get(i, 6)[0] * rows), rows - 1);
+                    int startX = Math.max((int) (detections.get(i, 3)[0] * cols), 0);
+                    int startY = Math.max((int) (detections.get(i, 4)[0] * rows), 0);
+                    int endX = Math.min((int) (detections.get(i, 5)[0] * cols), cols - 1);
+                    int endY = Math.min((int) (detections.get(i, 6)[0] * rows), rows - 1);
 
                     // The detected face
                     Mat face = frame.submat(new Range(startY, endY), new Range(startX, endX));
@@ -161,7 +174,7 @@ public class FaceMaskDetection {
                     Imgproc.resize(RGBFace, resizedFace, new Size(224, 224));
 
                     INDArray faceINDArray = new NativeImageLoader().asMatrix(resizedFace);
-                    new ImagePreProcessingScaler().	preProcess(faceINDArray);
+                    new ImagePreProcessingScaler().preProcess(faceINDArray);
 
                     faces.add(faceINDArray.reshape(1, 224, 224, 3));
 
@@ -175,13 +188,13 @@ public class FaceMaskDetection {
                 return -1;
             }
 
-            for (INDArray face: faces) {
+            for (INDArray face : faces) {
                 INDArray[] predictions = model.output(face);
 
                 double mask = predictions[0].getDouble(0);
                 double withoutMask = predictions[0].getDouble(1);
 
-                if (mask < withoutMask){
+                if (mask < withoutMask) {
                     return 0;
                 }
             }
@@ -193,25 +206,5 @@ public class FaceMaskDetection {
         }
 
         return -1;
-    }
-
-    public static ComputationGraph getModelInstance() throws InvalidKerasConfigurationException, IOException, UnsupportedKerasConfigurationException {
-        if (model == null) {
-            model = KerasModelImport.importKerasModelAndWeights(
-                FileSystem.getModelResource("mask_detector.model")
-            );
-        }
-
-        return model;
-    }
-
-    public static Net getFaceNetInstance() {
-        if (faceNet == null) {
-            String prototxtPath = FileSystem.getModelResource("face_detector/deploy.prototxt");
-            String weightsPath = FileSystem.getModelResource("face_detector/res10_300x300_ssd_iter_140000.caffemodel");
-            faceNet = Dnn.readNet(prototxtPath, weightsPath);
-        }
-
-        return  faceNet;
     }
 }

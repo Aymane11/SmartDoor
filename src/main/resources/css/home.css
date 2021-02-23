@@ -1,34 +1,22 @@
-@import "Roboto.css";
-
-* {
-    -fx-gray-400: rgba(156,163,175, 1);
-    -fx-gray-800: #1f2937;
-    -fx-cyan-400: #00a7e5;
-    -fx-green-500: rgba(16,185,129, 1);
-    -fx-red-500: rgba(239,68,68,1);
-}
-
-.root {
-    -fx-font-family: "Roboto", sans-serif;
-    -fx-font-size: 16px;
-    -fx-font-weight: 400;
-    -fx-background-color: #000;
-}
+@import "style.css";
 
 .box {
     -fx-background-color: -fx-gray-800;
 }
 
 .alert {
-    -fx-background-color: #48D1CC;
+    -fx-background-color: -fx-main-color;
     -fx-padding: 40px 40px 40px 40px;
 }
+
 .alert.denied {
     -fx-background-color: -fx-red-500;
 }
+
 .alert.success {
     -fx-background-color: -fx-green-500;
 }
+
 .alert.verifying {
     -fx-background-color: -fx-gray-400;
 }
@@ -40,13 +28,6 @@
 }
 
 .adminButton {
-    -fx-background-color:  rgba(0, 0, 0, 0.15);
+    -fx-background-color: rgba(0, 0, 0, 0.15);
     -fx-cursor: hand;
-}
-
-.progressBar {
-    -fx-accent: #00a7e5;
-    -fx-background-color: #00FF00;
-    -fx-progress-color: #0000FF;
-    -fx-border-radius: 0;
 }

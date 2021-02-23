@@ -1,42 +1,35 @@
 package smartdoor;
 
-import smartdoor.controllers.HomeController;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+
 import org.bytedeco.javacpp.Loader;
 import org.bytedeco.opencv.opencv_java;
+
 import smartdoor.utils.FileSystem;
+import smartdoor.controllers.HomeController;
 
 public class HomeWindow extends Application {
-    protected Stage window;
+    protected Stage primaryStage;
     protected FXMLLoader loader;
 
     @Override
     public void start(Stage stage) throws Exception {
-        window = stage;
+        primaryStage = stage;
 
-        window.setMinHeight(400);
-        window.setMinWidth(400);
+        primaryStage.setMinHeight(500);
+        primaryStage.setMinWidth(500);
         loader = new FXMLLoader(FileSystem.toURL(FileSystem.getFXML("Home")));
 
         Scene scene = new Scene((Parent) loader.load());
 
-        window.setTitle("SmartDoor");
-        /*window.initStyle(StageStyle.TRANSPARENT);*/
-        window.setScene(scene);
-        window.show();
-        window.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                closeWindow();
-            }
-        });
+        primaryStage.setTitle("SmartDoor");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> closeWindow());
     }
 
     protected void closeWindow() {
@@ -44,7 +37,7 @@ public class HomeWindow extends Application {
             ((HomeController) loader.getController()).setClosed();
         }
 
-        window.close();
+        primaryStage.close();
         System.exit(0);
     }
 

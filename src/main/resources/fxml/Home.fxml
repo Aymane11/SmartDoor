@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import java.net.* ?>
-<?import javafx.scene.control.* ?>
-<?import javafx.scene.image.* ?>
-<?import javafx.scene.layout.* ?>
-<?import javafx.scene.text.* ?>
 
-<GridPane fx:id="bigContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="980.0" styleClass="box" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdoor.controllers.HomeController">
+<GridPane fx:id="bigContainer" styleClass="box" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdoor.controllers.HomeController">
 	<stylesheets>
 		<URL value="@../css/home.css" />
 	</stylesheets>
@@ -35,18 +27,19 @@
 				<Label fx:id="maskMessage" styleClass="alertMessage" text="Wear a Mask Buddy to Get In" BorderPane.alignment="CENTER" />
 			</center>
 			<left>
-				<Button mnemonicParsing="false" onMouseClicked="#gotoLogin" styleClass="adminButton" BorderPane.alignment="CENTER">
+				<Button onMouseClicked="#gotoLogin" styleClass="adminButton" mnemonicParsing="false" BorderPane.alignment="CENTER">
 					<graphic>
 						<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@../images/icons/user.png" />
 							</image>
 						</ImageView>
-					</graphic></Button>
+					</graphic>
+				</Button>
 			</left>
-			<cursor>
-				<Cursor fx:constant="HAND" />
-			</cursor>
+<!--			<cursor>-->
+<!--				<Cursor fx:constant="HAND" />-->
+<!--			</cursor>-->
 		</BorderPane>
 	</children>
 </GridPane>

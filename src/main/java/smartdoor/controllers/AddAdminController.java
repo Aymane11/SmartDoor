@@ -2,21 +2,22 @@ package smartdoor.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+
 import smartdoor.dao.AdminDao;
 import smartdoor.dao.impl.AdminDaoImpl;
 import smartdoor.models.Admin;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddAdminController implements Initializable {
+
     @FXML
     private TextField usernameField;
     @FXML
@@ -27,11 +28,9 @@ public class AddAdminController implements Initializable {
     private Label labelErrors;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) {}
 
-    }
-
-    public void confirmAdd(MouseEvent event) throws IOException {
+    public void confirmAdd(MouseEvent event) {
         setErrors("");
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -55,22 +54,18 @@ public class AddAdminController implements Initializable {
             return;
         }
 
-
-        // Create new admin and remove the old one
+        // Create a new admin and remove the old one
         Admin newAdmin = new Admin();
         newAdmin.setUsername(username);
         newAdmin.setPassword(password);
         AdminDao newAdminDAO = new AdminDaoImpl();
         newAdminDAO.insert(newAdmin);
 
-        // Get new admin from db (test)
-        System.out.println(new AdminDaoImpl().get(username));
-
-        // Go back to home view
-
+        // Go back to dashboard view
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
+        stage.resizableProperty().setValue(Boolean.FALSE);
     }
 
     private void setErrors(String error) {

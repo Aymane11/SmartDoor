@@ -1,21 +1,13 @@
-.ap {
+@import "style.css";
+
+.pane {
     -fx-background-color: #FFF;
 }
-.btn {
-    -fx-background-color:  #48D1CC;
-    -fx-font-size: 12px;
-    -fx-text-fill: #FFF;
+
+.tab {
+    -fx-background-color: -fx-main-color;
 }
 
-.tab_pane .tab-header-background {
-    -fx-background-color: -fx-outer-background, -fx-inner-border, derive(-fx-color, -100%);
-}
-.t{
-    -fx-background-color: #48D1CC;
-}
-.tv{
-    -fx-background-color: #AFEEEE;
-}
-.table{
-    -fx-background-color: 	#FFF;
+.table {
+    -fx-background-color: #FFF;
 }

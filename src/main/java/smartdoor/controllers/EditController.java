@@ -33,9 +33,7 @@ public class EditController implements Initializable {
     private Label labelErrors;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
+    public void initialize(URL location, ResourceBundle resources) {}
 
     public void confirmEdit(MouseEvent event) throws IOException {
         setErrors("");
@@ -58,7 +56,6 @@ public class EditController implements Initializable {
 
         Admin currentAdmin = LoginController.currentAdmin;
 
-        // TODO : Remove ability to edit username
         // Check if the username doesnt exist
         if (new AdminDaoImpl().get(username) != null) {
             setErrors("Username already taken.");
@@ -78,17 +75,14 @@ public class EditController implements Initializable {
         AdminDao AdminDao = new AdminDaoImpl();
         AdminDao.update(currentAdmin);
 
+        // Logout and go back to home view
         LoginController.currentAdmin = null;
-
-        // Go back to home view
-
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-        stage.close();
-
         Scene scene = new Scene(FXMLLoader.load(FileSystem.toURL(FileSystem.getFXML("Home"))));
         stage.setScene(scene);
         stage.show();
+        stage.resizableProperty().setValue(Boolean.FALSE);
     }
 
     private void setErrors(String error) {

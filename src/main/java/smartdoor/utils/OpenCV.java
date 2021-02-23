@@ -60,9 +60,7 @@ final public class OpenCV {
      *            the value to set for the given {@link ObjectProperty}
      */
     public static <T> void onFXThread(final ObjectProperty<T> property, final T value) {
-        Platform.runLater(() -> {
-            property.set(value);
-        });
+        Platform.runLater(() -> property.set(value));
     }
 
     /**

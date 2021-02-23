@@ -1,35 +1,35 @@
 @font-face {
-    font-family: "Roboto";
+    font-family: "Roboto Light";
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url("../fonts/Roboto/Roboto-Light.ttf");
+    src: url("../fonts/Roboto/Roboto_Light.ttf");
 }
 @font-face {
-    font-family: "Roboto";
+    font-family: "Roboto Regular";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("../fonts/Roboto/Roboto-Regular.ttf");
+    src: url("../fonts/Roboto/Roboto_Regular.ttf");
 }
 @font-face {
-    font-family: "Roboto";
+    font-family: "Roboto Medium";
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url("../fonts/Roboto/Roboto-Medium.ttf");
+    src: url("../fonts/Roboto/Roboto_Medium.ttf");
 }
 @font-face {
-    font-family: "Roboto";
+    font-family: "Roboto Bold";
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url("../fonts/Roboto/Roboto-Bold.ttf");
+    src: url("../fonts/Roboto/Roboto_Bold.ttf");
 }
 @font-face {
-    font-family: "Roboto";
+    font-family: "Roboto Black";
     font-style: normal;
     font-weight: 900;
     font-display: swap;
-    src: url("../fonts/Roboto/Roboto-Black.ttf");
+    src: url("../fonts/Roboto/Roboto_Black.ttf");
 }

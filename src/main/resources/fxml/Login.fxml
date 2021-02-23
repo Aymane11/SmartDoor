@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdoor.controllers.LoginController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="container" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdoor.controllers.LoginController">
 	<stylesheets>
 		<URL value="@../css/login.css" />
 	</stylesheets>
 	<children>
-		<AnchorPane prefHeight="503.0" prefWidth="382.0" styleClass="left-sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<AnchorPane styleClass="left-sidebar" prefHeight="503.0" prefWidth="382.0"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
-				<Label alignment="CENTER" layoutX="104.0" layoutY="216.0" prefHeight="23.0" prefWidth="173.0" styleClass="left-sidebar-title" text="Smart Door" textFill="WHITE">
-					<font>
-						<Font size="32.0" />
-					</font>
-				</Label>
-				<Label alignment="CENTER" layoutX="88.0" layoutY="264.0" prefHeight="23.0" prefWidth="205.0" styleClass="left-sidebar-subtitle" text="Create manage your wallets easily" textFill="WHITE" />
-				<Hyperlink fx:id="goBack" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="14.0" onMouseClicked="#handleButtonAction" prefHeight="29.0" prefWidth="78.0" styleClass="anchor" text="&lt; Go Back" textFill="#cbcbcb">
-					<font>
-						<Font size="14.0" />
-					</font>
-				</Hyperlink>
+				<Label styleClass="left-sidebar-title" layoutX="91.0" layoutY="217.0" prefHeight="65.0" prefWidth="199.0" text="Smart Door" />
+				<Hyperlink fx:id="goBack" styleClass="anchor" layoutX="19.0" layoutY="14.0" onMouseClicked="#handleClick" prefHeight="29.0" prefWidth="78.0" text="&lt; Go Back" />
 			</children>
 		</AnchorPane>
-		<Pane layoutX="452.0" layoutY="136.0" prefHeight="239.0" prefWidth="350.0" AnchorPane.bottomAnchor="128.0" AnchorPane.topAnchor="136.0">
+		<Pane layoutX="419.0" layoutY="132.0" prefHeight="239.0" prefWidth="350.0" AnchorPane.bottomAnchor="132.0" AnchorPane.topAnchor="132.0">
 			<children>
-				<TextField fx:id="userField" layoutX="37.0" layoutY="33.0" prefHeight="34.0" prefWidth="275.0" promptText="Username" />
-				<PasswordField fx:id="passField" layoutX="37.0" layoutY="94.0" prefHeight="34.0" prefWidth="275.0" promptText="Password" />
-				<Label fx:id="labelErrors" styleClass="label-error" alignment="CENTER" layoutX="36.0" layoutY="139.0" prefHeight="24.0" prefWidth="275.0" />
-				<Separator layoutX="37.0" layoutY="173.0" prefHeight="7.0" prefWidth="275.0" />
-				<Button fx:id="loginBtn" layoutX="38.0" layoutY="191.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="34.0" prefWidth="275.0" styleClass="signin-button" text="Sign in" textFill="WHITE" />
+				<TextField fx:id="usernameField" layoutX="37.0" layoutY="22.0" prefHeight="34.0" prefWidth="275.0" promptText="Username" />
+				<PasswordField fx:id="passwordField" layoutX="37.0" layoutY="83.0" prefHeight="34.0" prefWidth="275.0" promptText="Password" />
+				<Label fx:id="labelErrors" styleClass="label-errors" layoutX="36.0" layoutY="139.0" prefHeight="24.0" prefWidth="275.0" />
+				<Separator layoutX="37.0" layoutY="162.0" prefHeight="7.0" prefWidth="275.0" />
+				<Button fx:id="loginBtn" styleClass="btn" layoutX="38.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#handleClick" prefHeight="34.0" prefWidth="275.0" text="Sign in"/>
 			</children>
 		</Pane>
 	</children>

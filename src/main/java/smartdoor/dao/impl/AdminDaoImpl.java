@@ -33,9 +33,8 @@ public class AdminDaoImpl implements AdminDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-			if (conn != null)
-				conn.close();
-		}
+            conn.close();
+        }
     }
 
     @Override
@@ -45,10 +44,10 @@ public class AdminDaoImpl implements AdminDao {
             conn = new ConnectionDB();
 
             String sql = "UPDATE admin SET " +
-                            "username = ?, " +
-                            "password = ? " +
-                            "WHERE id = ? " +
-                            "LIMIT 1 ";
+                    "username = ?, " +
+                    "password = ? " +
+                    "WHERE id = ? " +
+                    "LIMIT 1 ";
             PreparedStatement preparedStatement = conn.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, admin.getUsername());
             preparedStatement.setString(2, admin.getPassword());
@@ -58,9 +57,10 @@ public class AdminDaoImpl implements AdminDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-			if (conn != null)
-				conn.close();
-		}
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 
     @Override
@@ -78,9 +78,10 @@ public class AdminDaoImpl implements AdminDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-			if (conn != null)
-				conn.close();
-		}
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 
     @Override
@@ -106,10 +107,10 @@ public class AdminDaoImpl implements AdminDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-			if (conn != null)
-				conn.close();
-
-			return admin;
-		}
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return admin;
     }
 }

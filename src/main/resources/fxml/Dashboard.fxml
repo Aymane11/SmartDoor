@@ -4,32 +4,39 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdoor.controllers.DashboardController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdoor.controllers.DashboardController">
     <stylesheets>
         <URL value="@../css/dashboard.css" />
     </stylesheets>
     <children>
-        <TabPane prefHeight="400.0" prefWidth="600.0" styleClass="tab_pane" stylesheets="@../css/dashboard.css" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab styleClass="t" text="Dashboard">
+                <Tab styleClass="tab" text="Dashboard">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="ap" stylesheets="@../css/dashboard.css">
+                        <AnchorPane styleClass="pane" minHeight="0.0" minWidth="0.0" prefHeight="427.0" prefWidth="714.0">
                             <children>
-                                <Button fx:id="logoutBtn" onMouseClicked="#addAdmin" layoutX="238.0" layoutY="248.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="124.0" styleClass="btn" text="Add Admin" />
-                                <Button fx:id="editBtn" onMouseClicked="#editDetails" layoutX="238.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" styleClass="btn" text="Edit Credentials" />
-                                <Button fx:id="addAdminBtn" onMouseClicked="#logout" layoutX="238.0" layoutY="127.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" styleClass="btn" text="Logout" />
+                                <Button fx:id="addAdminBtn" styleClass="btn" layoutX="337.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#handleClick" prefHeight="25.0" prefWidth="124.0" text="Add Admin" />
+                                <Button fx:id="editBtn" styleClass="btn" layoutX="337.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#handleClick" prefHeight="25.0" prefWidth="124.0" text="Edit Credentials" />
+                                <Button styleClass="btn" layoutX="337.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="25.0" prefWidth="125.0" text="Logout" />
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab styleClass="t" text="Sessions">
+                <Tab styleClass="tab" text="Sessions">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="ap">
+                        <AnchorPane styleClass="pane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="sessionsTable" layoutY="2.0" prefHeight="368.0" prefWidth="600.0" styleClass="table" stylesheets="@../css/dashboard.css" />
+                                <TableView fx:id="sessionsTable" styleClass="table" layoutY="-1.0" prefHeight="470.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn fx:id="idCol" prefWidth="79.4181798696518" text="ID" />
+                                        <TableColumn fx:id="dateInCol" prefWidth="496.58177947998047" text="Date In" />
+                                        <TableColumn fx:id="fileNameCol" prefWidth="223.418212890625" text="File name" />
+                                    </columns>
+                                </TableView>
                             </children>
                         </AnchorPane>
                     </content>

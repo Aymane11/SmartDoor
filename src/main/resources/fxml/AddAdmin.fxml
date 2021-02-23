@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdoor.controllers.AddAdminController">
    <stylesheets>
-      <URL value="@../css/edit.css" />
+      <URL value="@../css/form.css" />
    </stylesheets>
    <children>
       <Label layoutX="147.0" layoutY="126.0" text="Username" />
@@ -18,7 +18,7 @@
       <PasswordField fx:id="passwordField" layoutX="299.0" layoutY="170.0" />
       <Label layoutX="148.0" layoutY="225.0" text="Confirm password" />
       <PasswordField fx:id="passwordConfirmField" layoutX="299.0" layoutY="220.0" />
-      <Button fx:id="confirmBtn" layoutX="267.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#confirmAdd" text="Confirm" />
-      <Label fx:id="labelErrors" layoutX="216.0" layoutY="57.0" prefHeight="17.0" prefWidth="154.0" styleClass="labelErrors" />
+      <Button styleClass="btn" layoutX="267.0" layoutY="287.0" mnemonicParsing="false" onMouseClicked="#confirmAdd" text="Confirm" />
+      <Label fx:id="labelErrors" styleClass="label-errors" layoutX="216.0" layoutY="57.0" prefHeight="17.0" prefWidth="154.0" />
    </children>
 </AnchorPane>
