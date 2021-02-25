@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import smartdoor.actions.LoginAction;
 import smartdoor.dao.AdminDao;
 import smartdoor.dao.impl.AdminDaoImpl;
 import smartdoor.models.Admin;
@@ -36,20 +37,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Login Started!");
-    }
 
-    public static Admin login(String username, String password) {
-        if (username.isEmpty() || password.isEmpty())
-            return null;
-
-        AdminDao adminDao = new AdminDaoImpl();
-        Admin admin = adminDao.get(username);
-
-        if (admin == null || !BCrypt.checkpw(password, admin.getPassword()))
-            return null;
-
-        return admin;
     }
 
     /**
@@ -100,7 +88,7 @@ public class LoginController implements Initializable {
             setLblError("Username and password cannot be empty.");
             return false;
         } else {
-            Admin admin = login(username, password);
+            Admin admin = new LoginAction().login(username, password);
             if (admin == null) {
                 setLblError("Wrong email or password.");
                 return false;

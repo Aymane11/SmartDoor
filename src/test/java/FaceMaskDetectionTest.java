@@ -10,10 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FaceMaskDetectionTest extends TestCase {
 	private FaceMaskDetection faceMaskDetection = new FaceMaskDetection();
 
-	{
-		Loader.load(opencv_java.class);
-	}
-
 	@Test
 	public void test_it_detects_person_with_a_mask() {
 		assertEquals(1, faceMaskDetection.detect(OpenCV.image2Mat(getResource("mask2.jpg"))));

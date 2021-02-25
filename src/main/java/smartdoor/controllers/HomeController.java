@@ -56,7 +56,6 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Home started!");
         startCamera();
 
         // Change container size according to window size

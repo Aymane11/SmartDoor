@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ import smartdoor.dao.impl.SessionDaoImpl;
 import smartdoor.models.Session;
 import smartdoor.utils.FileSystem;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -89,6 +91,7 @@ public class DashboardController implements Initializable {
         Scene scene = new Scene(FXMLLoader.load(FileSystem.toURL(FileSystem.getFXML(fxmlFile))));
 
         dialog.setScene(scene);
+        dialog.getIcons().add(new Image(new FileInputStream(FileSystem.getImageResource("icons/icon.png"))));
         dialog.show();
         dialog.resizableProperty().setValue(Boolean.FALSE);
     }

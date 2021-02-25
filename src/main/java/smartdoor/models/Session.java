@@ -82,6 +82,7 @@ public class Session {
                 Scene scene = new Scene(root, image.getWidth(), image.getHeight());
                 stage.setTitle("Image Preview");
                 stage.setScene(scene);
+                stage.getIcons().add(new Image(new FileInputStream(FileSystem.getImageResource("icons/icon.png"))));
                 stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
