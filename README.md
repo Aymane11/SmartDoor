@@ -27,7 +27,7 @@
 
 ## About The Project
 <div align="center">
-    <img alt="Demo" src="https://i.imgur.com/pgW26aQ.gif" width=60%">
+    <img alt="Demo" src="../main/src/main/resources/images/demo.gif" width=60%">
 </div>
 
 
