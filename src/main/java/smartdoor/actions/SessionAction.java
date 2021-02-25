@@ -16,18 +16,28 @@ public class SessionAction {
         this.frame = frame;
     }
 
+    /**
+     * Save the session with its image
+     *
+     * @return void
+     */
     public void save() {
         // Save the frame
         String filename = generateFilename();
         OpenCV.mat2File(frame, FileSystem.getDataResource(filename));
 
-        Session  session = new Session();
+        Session session = new Session();
         session.setDate_in();
         session.setFilename(filename);
 
         new SessionDaoImpl().create(session);
     }
 
+    /**
+     * Generates a UUID filename
+     *
+     * @return String
+     */
     public String generateFilename() {
         return UUID.randomUUID().toString() + ".jpg";
     }

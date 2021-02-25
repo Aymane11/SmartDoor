@@ -6,7 +6,13 @@ import smartdoor.dao.impl.AdminDaoImpl;
 import smartdoor.models.Admin;
 
 public class LoginAction {
-
+    /**
+     * Get the Admin object from DB using the given credentials
+     *
+     * @param username
+     * @param password
+     * @return Admin object
+     */
     public Admin login(String username, String password) {
         if (username.isEmpty() || password.isEmpty())
             return null;

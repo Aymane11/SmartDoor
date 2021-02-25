@@ -35,7 +35,9 @@ public class EditController implements Initializable {
     private Label labelErrors;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL location, ResourceBundle resources) {
+        usernameField.setText(LoginController.currentAdmin.getUsername());
+    }
 
     public void confirmEdit(MouseEvent event) throws IOException {
         setErrors("");

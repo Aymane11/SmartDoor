@@ -3,6 +3,11 @@ package smartdoor.config;
 import java.util.HashMap;
 
 public class DatabaseConfig extends Config {
+    /**
+     * Map the DB configuration variables
+     *
+     * @var HashMap
+     */
     private static final HashMap<String, String>  databaseConfig = new HashMap<>();
 
     static {
@@ -13,7 +18,13 @@ public class DatabaseConfig extends Config {
         databaseConfig.put("port", Config.dotenv.get("DB_PORT", "3306"));
     }
 
-    public static String get(String config) {
-        return databaseConfig.getOrDefault(config, null);
+    /**
+     * Get the configuration variable passed in argument
+     *
+     * @param key
+     * @return String
+     */
+    public static String get(String key) {
+        return databaseConfig.getOrDefault(key, null);
     }
 }

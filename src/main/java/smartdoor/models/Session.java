@@ -59,6 +59,11 @@ public class Session {
         this.filename = UUID.randomUUID().toString() + ".jpg";
     }
 
+    /**
+     * Get and create session's filename button in Dashboard
+     *
+     * @return Button
+     */
     public Button getFilenameLink() {
         Button btn = new Button("See image");
         btn.getStyleClass().add("btn");

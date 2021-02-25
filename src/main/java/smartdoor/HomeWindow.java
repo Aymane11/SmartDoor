@@ -46,6 +46,7 @@ public class HomeWindow extends Application {
     }
 
     public static void main(String[] args) {
+        // Load the OpenCV library
         Loader.load(opencv_java.class);
 
         launch(args);

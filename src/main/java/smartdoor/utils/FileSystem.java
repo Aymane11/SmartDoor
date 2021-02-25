@@ -1,9 +1,7 @@
 package smartdoor.utils;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 final public class FileSystem {
@@ -18,22 +16,8 @@ final public class FileSystem {
         return Paths.get(getResourcesPath(), "fxml").toString();
     }
 
-    public static String getCSSPath() { return Paths.get(getResourcesPath(), "css").toString(); }
-
-    public static String getFontsPath() {
-        return Paths.get(getResourcesPath(), "fonts").toString();
-    }
-
     public static String getImagesPath() {
         return Paths.get(getResourcesPath(), "images").toString();
-    }
-
-    public static String getIconsPath() {
-        return Paths.get(getResourcesPath(), "images/icons").toString();
-    }
-
-    public static String getEnvPath() {
-        return Paths.get(getResourcesPath(), ".env").toString();
     }
 
     public static String getModelResourcePath() {
@@ -58,14 +42,6 @@ final public class FileSystem {
 
     public static String getImageResource(String path) { return Paths.get(getImagesPath(), path.split("/")).toString(); }
 
-    public static Path toPath(String path) {
-        return Paths.get(path);
-    }
-
-    public static URI toUri(String path) {
-        return Paths.get(path).toUri();
-    }
-
     public static URL toURL(String path) {
         try {
             return Paths.get(path).toUri().toURL();
@@ -74,14 +50,6 @@ final public class FileSystem {
         }
 
         return null;
-    }
-
-    public static String getFileExtension(String name) {
-        int lastIndexOf = name.lastIndexOf(".");
-        if (lastIndexOf == -1) {
-            return ""; // empty extension
-        }
-        return name.substring(lastIndexOf);
     }
 
     public static String getDataResource(String path) { return Paths.get(getDataResourcePath(), path.split("/")).toString(); }
